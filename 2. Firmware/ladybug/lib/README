@@ -1,0 +1,36 @@
+## File Hierarchy
+|--lib
+|  |
+|  |--Bar
+|  |  |--src
+|  |     |- Bar.c
+|  |     |- Bar.h
+|  |  |- library.json (optional, custom build options, etc)
+|  |
+|  |--Foo
+|  |  |- Foo.c
+|  |  |- Foo.h
+|  |
+|  |- README --> THIS FILE
+|
+|- platformio.ini
+|--src
+   |- main.c
+
+and a contents of `src/main.c`:
+```
+#include <Foo.h>
+#include <Bar.h>
+
+int main (void)
+{
+  ...
+}
+
+```
+
+PlatformIO Library Dependency Finder will find automatically dependent
+libraries scanning project source files.
+
+More information about PlatformIO Library Dependency Finder
+- https://docs.platformio.org/page/librarymanager/ldf.html
