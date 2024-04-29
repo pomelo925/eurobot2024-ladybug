@@ -6,11 +6,12 @@
 #include <actuator.h>
 #include <infrared.h>
 #include <actuator.h>
+
 BUGS Bugs;
 
 void BUGS::ID_1_run(){
-  Wheel.moveDirect(3,1);
-  Wheel.rotateClockwise(3,1);
+  Wheel.moveDirect(3);
+  Wheel.rotateClockwise(3);
   ESP_Servo.moveTo(0);
   delay(5000);
   ESP_Servo.moveTo(180);

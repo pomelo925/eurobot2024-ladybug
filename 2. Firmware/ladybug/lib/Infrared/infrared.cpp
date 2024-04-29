@@ -9,47 +9,47 @@ VL53 vl53;
 
 void VL53::setID(){
   // all reset
-  Serial.println(F("VL53 set ID test 1."));
+  // Serial.println(F("VL53 set ID test 1."));
   for (int i = 0; i < 3; i++) digitalWrite(SHT_LOX[i], LOW);    
   delay(10);
 
   // all unreset
-  Serial.println(F("VL53 set ID test 2."));
+  // Serial.println(F("VL53 set ID test 2."));
   for (int i = 0; i < 3; i++) digitalWrite(SHT_LOX[i], HIGH);    
   delay(10);
 
   // activating LOX1 and reseting LOX2
-  Serial.println(F("VL53 set ID test 3."));
+  // Serial.println(F("VL53 set ID test 3."));
   digitalWrite(SHT_LOX[0], HIGH);
   for (int i = 1; i < 3; i++) digitalWrite(SHT_LOX[i], LOW); 
   delay(10);   
 
   // initing LOX1
-  Serial.println(F("VL53 set ID test 4."));
+  // Serial.println(F("VL53 set ID test 4."));
   if(!lox1.begin(LOX1_ADDRESS)) {
     Serial.println(F("Failed to boot first VL53L0X"));
     while(1);
   }
 
   // activating LOX2
-  Serial.println(F("VL53 set ID test 5."));
+  // Serial.println(F("VL53 set ID test 5."));
   digitalWrite(SHT_LOX[1], HIGH);
   delay(10);
 
   //initing LOX2
-  Serial.println(F("VL53 set ID test 6."));
+  // Serial.println(F("VL53 set ID test 6."));
   if(!lox2.begin(LOX2_ADDRESS)) {
     Serial.println(F("Failed to boot second VL53L0X"));
     while(1);
   }
 
   // activating LOX3
-  Serial.println(F("VL53 set ID test 7."));
+  // Serial.println(F("VL53 set ID test 7."));
   digitalWrite(SHT_LOX[2], HIGH);
   delay(10);
 
   //initing LOX3
-  Serial.println(F("VL53 set ID test 8."));
+  // Serial.println(F("VL53 set ID test 8."));
   if(!lox3.begin(LOX3_ADDRESS)) {
     Serial.println(F("Failed to boot third VL53L0X"));
     while(1);
@@ -61,8 +61,8 @@ void VL53::setup() {
   for (int i = 0; i < 3; i++)  pinMode(SHT_LOX[i], OUTPUT);
   Serial.println("Shutdown pins inited...");
   for (int i = 0; i < 3; i++)  digitalWrite(SHT_LOX[i], LOW);
-  Serial.println("All in reset mode...(pins are low)");
-  Serial.println(F("VL53 set ID start."));
+  // Serial.println("All in reset mode...(pins are low)");
+  Serial.println(F("VL53 set ID start. "));
   setID();
 }
 

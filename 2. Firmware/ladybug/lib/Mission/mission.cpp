@@ -2,7 +2,7 @@
 #include <mission.h>
 
 /**
- * @brief 根據 _id 執行對應 Bug 任務
+ * @brief 根據 _id 執行對應 Bugs 任務
  */
 void MISSION::run(){
   switch(_id) {
@@ -31,7 +31,7 @@ void MISSION::run(){
   case 12:
     Bugs.ID_12_run(); break;
   default:
-    Serial.println("[MISSION][E] No such BugID");
-  }
+    Serial.println("[MISSION][E] No such BugsID");
+  }             
 }
 

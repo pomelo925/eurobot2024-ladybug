@@ -6,9 +6,9 @@
 
 class WHEEL{
 public:
-  void moveDirect(float time, int mode);
-  void rotateClockwise(float time, int mode);
-  void rotateCounterClockwise(float time, int mode);
+  void moveDirect(float time);
+  void rotateClockwise(float time);
+  void rotateCounterClockwise(float time);
 
   WHEEL(){
     setup();

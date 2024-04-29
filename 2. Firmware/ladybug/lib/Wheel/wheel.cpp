@@ -8,7 +8,7 @@ void WHEEL::setup(){
   pinMode(DIGITAL_GPIO_16, OUTPUT);
 }
 
-void WHEEL::moveDirect(float time, int mode){
+void WHEEL::moveDirect(float time){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
@@ -25,30 +25,18 @@ void WHEEL::moveDirect(float time, int mode){
     Serial.print("\rPass: ");
     Serial.println(millis() - startTime);
   // OBSTACLE
-    // if(!isSafe()){ 
-    //   analogWrite(ANALOG_GPIO_0, 0);
-    //   digitalWrite(DIGITAL_GPIO_16, LOW);
+  //   if(!isSafe()){   // isSafe 來自 vl53
+  //     analogWrite(ANALOG_GPIO_0, 0);
+  //     digitalWrite(DIGITAL_GPIO_16, LOW);
 
-    //   unsigned long waitingTimeStart = millis();
-    //   while(!isSafe()); 
-    //   startTime += ( millis() - waitingTimeStart ); 
-    // }
+  //     unsigned long waitingTimeStart = millis();
+  //     while(!isSafe()); 
+  //     startTime += ( millis() - waitingTimeStart ); 
+  //   }
   
-  // MODE
-    if(mode == 1){ // FULL SPEED
-      digitalWrite(DIGITAL_GPIO_16, HIGH);
-      analogWrite(ANALOG_GPIO_0, 255);
-    }
-    else if(mode == 2){ // HALF SPEED
-      analogWrite(ANALOG_GPIO_0, 120);
 
-      // 檢查超過秒數
-      if(millis() - lastSwitchTime >= _DIGITAL_HALF_SEC_MS){
-        isHigh = !isHigh; // 切換狀態
-        digitalWrite(DIGITAL_GPIO_16, isHigh ? HIGH : LOW); 
-        lastSwitchTime = millis(); 
-      }
-    }
+    digitalWrite(DIGITAL_GPIO_16, HIGH);
+    analogWrite(ANALOG_GPIO_0, 255);
   }
 
   analogWrite(ANALOG_GPIO_0, 0);
@@ -57,7 +45,7 @@ void WHEEL::moveDirect(float time, int mode){
   Serial.println("moveDirect terminates.");
 }
 
-void WHEEL::rotateClockwise(float time, int mode){
+void WHEEL::rotateClockwise(float time){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
@@ -79,22 +67,15 @@ void WHEEL::rotateClockwise(float time, int mode){
     //   startTime += ( millis() - waitingTimeStart ); 
     // }
   
-  // MODE 
-    if(mode == 1){ // FULL SPEED
-      analogWrite(ANALOG_GPIO_0, 255);
-      digitalWrite(DIGITAL_GPIO_16, LOW);
-    }
-    else if(mode == 2){ // HALF SPEED
-      analogWrite(ANALOG_GPIO_0, 120);
-      digitalWrite(DIGITAL_GPIO_16, LOW);
-    }
+    analogWrite(ANALOG_GPIO_0, 255);
+    digitalWrite(DIGITAL_GPIO_16, LOW);
   }
 
   analogWrite(ANALOG_GPIO_0, 0);
   digitalWrite(DIGITAL_GPIO_16, LOW);
 }
 
-void WHEEL::rotateCounterClockwise(float time, int mode){
+void WHEEL::rotateCounterClockwise(float time){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
@@ -116,20 +97,9 @@ void WHEEL::rotateCounterClockwise(float time, int mode){
     //   startTime += ( millis() - waitingTimeStart ); 
     // }
   
-  // MODE
-    if(mode == 1){ // FULL SPEED
-      analogWrite(ANALOG_GPIO_0, 0);
-      digitalWrite(DIGITAL_GPIO_16, HIGH);
-    }
-    else if(mode == 2){ // HALF SPEED
-      analogWrite(ANALOG_GPIO_0, 0);
-    // 檢查超過秒數
-      if(millis() - lastSwitchTime >= _DIGITAL_HALF_SEC_MS){
-        isHigh = !isHigh; // 切換狀態
-        digitalWrite(DIGITAL_GPIO_16, isHigh ? HIGH : LOW); 
-        lastSwitchTime = millis(); 
-      }
-    }
+    analogWrite(ANALOG_GPIO_0, 0);
+    digitalWrite(DIGITAL_GPIO_16, HIGH);
+    
   }
 
   analogWrite(ANALOG_GPIO_0, 0);

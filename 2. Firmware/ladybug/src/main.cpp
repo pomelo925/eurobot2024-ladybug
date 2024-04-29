@@ -1,20 +1,26 @@
 #include <Arduino.h>
 
-#include <wheel.h>
+#include <web.h>
 #include <mission.h>
 
-#define LADYBUG_ID 1
+/******** USER DEFINED *********/
+#define SSID "DIT_8C58" // mDNS Hostname
+#define PWD "ditrobotics" // mDNS Hostname
+#define HOSTNAME "ladybug-01" // mDNS Hostname
+#define LADYBUG_ID 1  // Mission ID
+/*******************************/
 
-// params：Ladybug ID
+WEBSERVER Webserver(SSID, PWD, HOSTNAME);
 MISSION Mission(LADYBUG_ID);
 
 void setup() {
   Serial.begin(115200);
+  while(!Webserver.readySignal){};
+  Mission.run();
 }
 
 void loop(){
-  Mission.run();
-  delay(6000000);
+  // baby baby baby ohhhhhhhh
 }
 
 

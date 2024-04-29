@@ -15,5 +15,5 @@ void SERVO::attach_check(){
  */
 void SERVO::moveTo(float angle){
   esp_servo.write(angle);
-  esp_servo.attach_check();
+  attach_check();
 } 

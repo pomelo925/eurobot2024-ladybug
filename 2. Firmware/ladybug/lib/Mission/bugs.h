@@ -1,5 +1,5 @@
-#ifndef _BUG1_H_
-#define _BUG1_H_
+#ifndef _BUGS_H_
+#define _BUGS_H_
 
 class BUGS{
 public:
@@ -16,6 +16,8 @@ public:
   void ID_11_run();
   void ID_12_run();
 };
+
+#include "bugs.h"
 
 extern BUGS Bugs;
 
