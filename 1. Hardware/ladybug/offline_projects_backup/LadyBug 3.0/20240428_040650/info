@@ -1,0 +1,347 @@
+{
+  "uuid": "6e373d034826dac342adc0833ee72b04",
+  "path": "Offline/LadyBug%203.0",
+  "name": "LadyBug 3.0",
+  "content": "",
+  "created_at": "2024-04-28 03:54:44",
+  "updated_at": "2024-04-28 04:06:50",
+  "stick": "",
+  "documents": [
+    {
+      "uuid": "3849c8e6ad878138a6f99d199171eed6",
+      "title": "Sheet_3.0",
+      "description": "",
+      "docType": "1",
+      "master": "7ea2335a0b023c7a0cb1593349486e5a",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "b0248eb51e084227889f2cb84eab79c4": 4,
+        "db433a24ebdc4280bbe05b949277e7d1": 1,
+        "f8f197bf97c5451a8f9475ae8340b4b9": 3,
+        "d82a8b5ed4554758a0cb59d2869b4011": 1,
+        "0ad203b5d5c84373a6263ad00c6ab16d": 6,
+        "28f82e3111cf400ea3443ae3489d4f41": 2,
+        "b2e45ef440b94cf392bfe91c2174b25e": 3
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "esp Vin",
+          1,
+          "JST2.0_2P",
+          "J1",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "chentodd2012",
+            "spiceSymbolName": "JST2.0_2P",
+            "puuid": "9d298b12c44e4a569b3cee40f320161b",
+            "uuid": "0ad203b5d5c84373a6263ad00c6ab16d"
+          }
+        ],
+        [
+          "e-stop",
+          1,
+          "JST2.0_2P",
+          "J2",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "chentodd2012",
+            "spiceSymbolName": "JST2.0_2P",
+            "puuid": "9d298b12c44e4a569b3cee40f320161b",
+            "uuid": "0ad203b5d5c84373a6263ad00c6ab16d"
+          }
+        ],
+        [
+          "motor 1",
+          1,
+          "JST2.0_2P",
+          "J3",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "chentodd2012",
+            "spiceSymbolName": "JST2.0_2P",
+            "puuid": "9d298b12c44e4a569b3cee40f320161b",
+            "uuid": "0ad203b5d5c84373a6263ad00c6ab16d"
+          }
+        ],
+        [
+          "motor 2",
+          1,
+          "JST2.0_2P",
+          "J4",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "chentodd2012",
+            "spiceSymbolName": "JST2.0_2P",
+            "puuid": "9d298b12c44e4a569b3cee40f320161b",
+            "uuid": "0ad203b5d5c84373a6263ad00c6ab16d"
+          }
+        ],
+        [
+          "GLV-L",
+          1,
+          "JST2.0_3P",
+          "J6",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "chentodd2012",
+            "spiceSymbolName": "JST2.0_3P",
+            "puuid": "0aad80c6a08340ccaa6ddb5e227d82b1",
+            "uuid": "f8f197bf97c5451a8f9475ae8340b4b9"
+          }
+        ],
+        [
+          "GLV-R",
+          1,
+          "JST2.0_3P",
+          "J7",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "chentodd2012",
+            "spiceSymbolName": "JST2.0_3P",
+            "puuid": "0aad80c6a08340ccaa6ddb5e227d82b1",
+            "uuid": "f8f197bf97c5451a8f9475ae8340b4b9"
+          }
+        ],
+        [
+          "Battery",
+          1,
+          "JST2.0_2P",
+          "J8",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "chentodd2012",
+            "spiceSymbolName": "JST2.0_2P",
+            "puuid": "9d298b12c44e4a569b3cee40f320161b",
+            "uuid": "0ad203b5d5c84373a6263ad00c6ab16d"
+          }
+        ],
+        [
+          "rst",
+          1,
+          "JST2.0_2P",
+          "J9",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "chentodd2012",
+            "spiceSymbolName": "JST2.0_2P",
+            "puuid": "9d298b12c44e4a569b3cee40f320161b",
+            "uuid": "0ad203b5d5c84373a6263ad00c6ab16d"
+          }
+        ],
+        [
+          "boot",
+          1,
+          "JST2.0_3P",
+          "J10",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "chentodd2012",
+            "spiceSymbolName": "JST2.0_3P",
+            "puuid": "0aad80c6a08340ccaa6ddb5e227d82b1",
+            "uuid": "f8f197bf97c5451a8f9475ae8340b4b9"
+          }
+        ],
+        [
+          "servo",
+          1,
+          "JST2.5_3P",
+          "J11",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "Paolo Federicis",
+            "spiceSymbolName": "JST2.5_3P",
+            "puuid": "c5cd8cc3150549568e959c1181d6b16f",
+            "uuid": "db433a24ebdc4280bbe05b949277e7d1"
+          }
+        ],
+        [
+          "1k",
+          3,
+          "R0603",
+          "R1,R2,R3",
+          {
+            "Supplier Part": "",
+            "Supplier": "",
+            "Contributor": "LCEDA_Lib",
+            "spiceSymbolName": "R_0603_US",
+            "Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "100",
+          1,
+          "R0603",
+          "R4",
+          {
+            "Supplier Part": "",
+            "Supplier": "",
+            "Contributor": "LCEDA_Lib",
+            "spiceSymbolName": "R_0603_US",
+            "Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "VL53-L",
+          1,
+          "JST-PH-2.0-5PIN",
+          "U1",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "Jogiraju",
+            "spiceSymbolName": "JST-B5B-PH-KL",
+            "puuid": "006c99b851d149219b961e9d64e88228",
+            "uuid": "b2e45ef440b94cf392bfe91c2174b25e"
+          }
+        ],
+        [
+          "VL53-M",
+          1,
+          "JST-PH-2.0-5PIN",
+          "U2",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "Jogiraju",
+            "spiceSymbolName": "JST-B5B-PH-KL",
+            "puuid": "006c99b851d149219b961e9d64e88228",
+            "uuid": "b2e45ef440b94cf392bfe91c2174b25e"
+          }
+        ],
+        [
+          "VL53-R",
+          1,
+          "JST-PH-2.0-5PIN",
+          "U3",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "Jogiraju",
+            "spiceSymbolName": "JST-B5B-PH-KL",
+            "puuid": "006c99b851d149219b961e9d64e88228",
+            "uuid": "b2e45ef440b94cf392bfe91c2174b25e"
+          }
+        ],
+        [
+          "AOD4184-R",
+          1,
+          "AOD4184",
+          "U4",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "alexsandrogg",
+            "spiceSymbolName": "AOD4184 alex",
+            "puuid": "ed51bcdcd3e847b2a6380109d24b80ef",
+            "uuid": "28f82e3111cf400ea3443ae3489d4f41"
+          }
+        ],
+        [
+          "AOD4184-L",
+          1,
+          "AOD4184",
+          "U5",
+          {
+            "Manufacturer": "",
+            "Manufacturer Part": "",
+            "Supplier Part": "",
+            "Supplier": "",
+            "link": "",
+            "Contributor": "alexsandrogg",
+            "spiceSymbolName": "AOD4184 alex",
+            "puuid": "ed51bcdcd3e847b2a6380109d24b80ef",
+            "uuid": "28f82e3111cf400ea3443ae3489d4f41"
+          }
+        ],
+        [
+          "ESP32 D1 MINI",
+          1,
+          "ESP32 WEMOS D1 MINI",
+          "U6",
+          {
+            "Manufacturer Part": "New SchematicLib",
+            "Contributor": "tonydc",
+            "Supplier Part": "undefined",
+            "Supplier": "",
+            "spiceSymbolName": "ESP32 D1 MINI",
+            "puuid": "8a0e4f4428354d04aef9217ae76276e3",
+            "uuid": "d82a8b5ed4554758a0cb59d2869b4011"
+          }
+        ]
+      ],
+      "updateTime": 1714248410,
+      "createTime": 1714247684,
+      "histories": [],
+      "created_at": "2024-04-28 03:54:44",
+      "updated_at": "2024-04-28 04:06:50"
+    }
+  ],
+  "sort": [],
+  "title": "LadyBug 3.0",
+  "foldername": "LadyBug 3.0",
+  "schfilename": "LadyBug 3.0.json",
+  "schfilemtime": 1714248410966
+}

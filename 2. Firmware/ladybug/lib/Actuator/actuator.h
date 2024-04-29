@@ -8,7 +8,7 @@
 
 class SERVO {
 public:
-  void moveTo(float angle, float speed);
+  void moveTo(float angle);
 
   SERVO(int pin): pin(pin) {
     ESP32PWM::allocateTimer(0);
@@ -20,7 +20,6 @@ private:
   Servo esp_servo;
 
   void attach_check();
-  void vel_update();
 
 // 速度控制內部參數 
   float currentAngle = 0.0;

@@ -2,14 +2,11 @@
 #define _MISSION_H_
 
 #include <Arduino.h>
-#include <bug1.h>
+#include <bugs.h>
 
 class MISSION{
 public:
-  MISSION(int id): _id(id) {
-    if(id==1) Bug1.update();
-    else Serial.println("[MISSION][E] No such BugID");
-  }
+  MISSION(int id): _id(id) {};
 
   void run();
 

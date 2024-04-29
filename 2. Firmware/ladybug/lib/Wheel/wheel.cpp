@@ -1,7 +1,12 @@
-#include <wheel.h>
 #include <Arduino.h>
+#include <wheel.h>
 
 WHEEL Wheel;
+
+void WHEEL::setup(){
+  pinMode(ANALOG_GPIO_0, OUTPUT);
+  pinMode(DIGITAL_GPIO_16, OUTPUT);
+}
 
 void WHEEL::moveDirect(float time, int mode){
   unsigned long startTime = millis();
@@ -12,8 +17,13 @@ void WHEEL::moveDirect(float time, int mode){
   bool isHigh = false; // 新增此行來追蹤當前狀態
 /** **/
 
+  Serial.println("[WHEEL] MoveDirect");
+  Serial.print("Target Time : ");
+  Serial.println(targetTime);
 
   while(millis() - startTime < targetTime){
+    Serial.print("\rPass: ");
+    Serial.println(millis() - startTime);
   // OBSTACLE
     // if(!isSafe()){ 
     //   analogWrite(ANALOG_GPIO_0, 0);
@@ -26,8 +36,8 @@ void WHEEL::moveDirect(float time, int mode){
   
   // MODE
     if(mode == 1){ // FULL SPEED
-      analogWrite(ANALOG_GPIO_0, 255);
       digitalWrite(DIGITAL_GPIO_16, HIGH);
+      analogWrite(ANALOG_GPIO_0, 255);
     }
     else if(mode == 2){ // HALF SPEED
       analogWrite(ANALOG_GPIO_0, 120);
@@ -56,12 +66,9 @@ void WHEEL::rotateClockwise(float time, int mode){
   bool isHigh = false; // 新增此行來追蹤當前狀態
 /** **/
 
+  Serial.println("[WHEEL] rotateClockwise");
 
   while(millis() - startTime < targetTime){
-    Serial.print("\rPassing Time: ");
-    Serial.print(millis() - startTime);    
-    Serial.print("               Target Time: ");
-    Serial.print(targetTime);
   // OBSTACLE
     // if(!isSafe()){ 
     //   analogWrite(ANALOG_GPIO_0, 0);
@@ -72,7 +79,7 @@ void WHEEL::rotateClockwise(float time, int mode){
     //   startTime += ( millis() - waitingTimeStart ); 
     // }
   
-  // MODE
+  // MODE 
     if(mode == 1){ // FULL SPEED
       analogWrite(ANALOG_GPIO_0, 255);
       digitalWrite(DIGITAL_GPIO_16, LOW);
@@ -96,6 +103,7 @@ void WHEEL::rotateCounterClockwise(float time, int mode){
   bool isHigh = false; // 新增此行來追蹤當前狀態
 /** **/
 
+  Serial.println("[WHEEL] rotateCounterClockwise");
 
   while(millis() - startTime < targetTime){
   // OBSTACLE
