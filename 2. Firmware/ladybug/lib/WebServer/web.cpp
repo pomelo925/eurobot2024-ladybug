@@ -75,7 +75,9 @@ void WEBSERVER::setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   initWiFi();
 
+  Serial.println("SEXXXX");
   AsyncWebServer server(80);
+  Serial.println("Three some");
 
   // Route for root / web page
   server.on("/", HTTP_GET, [this](AsyncWebServerRequest *request){
@@ -92,7 +94,9 @@ void WEBSERVER::setup() {
     } // Add this closing brace
     request->send(200, "text/plain", "OK");
   });
-
+  Serial.println("Four some");
   AsyncElegantOTA.begin(&server);  // Start ElegantOTA
+  Serial.println("Fork");
   server.begin();
+  Serial.println("NSFH");
 }

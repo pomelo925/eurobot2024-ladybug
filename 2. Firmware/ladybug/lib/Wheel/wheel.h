@@ -1,14 +1,17 @@
 #ifndef _WHEEL_H_
 #define _WHEEL_H_
 
-#define ANALOG_GPIO_0 0
+#define DIGITAL_GPIO_05 5
 #define DIGITAL_GPIO_16 16
+
+#define WHEEL_PRINT false
 
 class WHEEL{
 public:
   void moveDirect(float time);
   void rotateClockwise(float time);
   void rotateCounterClockwise(float time);
+  bool checkObstacle();
 
   WHEEL(){
     setup();

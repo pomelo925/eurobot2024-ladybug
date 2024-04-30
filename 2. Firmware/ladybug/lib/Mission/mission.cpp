@@ -31,7 +31,7 @@ void MISSION::run(){
   case 12:
     Bugs.ID_12_run(); break;
   default:
-    Serial.println("[MISSION][E] No such BugsID");
+    Serial.print("\n[MISSION][E] No such BugsID\n");
   }             
 }
 
