@@ -7,12 +7,13 @@
 
 VL53 vl53;
 
+
+/**
+ * @brief 分配三個 VL53L0X 的 ID/address
+ */
 void VL53::setID(){
-  // all reset
   for (int i = 0; i < 3; i++) digitalWrite(SHT_LOX[i], LOW);    
   delay(10);
-
-  // all unreset
   for (int i = 0; i < 3; i++) digitalWrite(SHT_LOX[i], HIGH);    
   delay(10);
 
@@ -49,16 +50,21 @@ void VL53::setID(){
   Serial.println(F("VL53 set ID done."));
 }
 
+
+/**
+ * @brief Vl530X initialize
+ */
 void VL53::setup() {
   for (int i = 0; i < 3; i++)  pinMode(SHT_LOX[i], OUTPUT);
-  Serial.println("Shutdown pins inited...");
-
   for (int i = 0; i < 3; i++)  digitalWrite(SHT_LOX[i], LOW);
-  Serial.println(F("VL53 set ID start. "));
   
   setID();
 }
 
+
+/**
+ * @brief Vl530X 讀取距離
+ */
 void VL53::read() {
   for (int i = 0; i < 3; i++) is_out_of_range[i] = 0;
   lox1.rangingTest(&measure1, false); // pass in 'true' to get debug data printout!
@@ -83,6 +89,10 @@ void VL53::read() {
   ReadBefore = 1;
 }
 
+
+/**
+ * @brief 列印三個 VL53L0X 的距離
+ */
 void VL53::print() {
   if (ReadBefore){
     for (int i=2; i>=0; i--) {   
@@ -91,35 +101,4 @@ void VL53::print() {
     }
     Serial.print("\r"); 
   }
-}
-
-void VL53::avoid(int flag[3]){
-  for(int i = 0; i < 3 && flag[i]; i++) {
-    if (!Is2ndMode) {
-      if (VL53_data[0] < stop_dst && !is_out_of_range[0]) stop_flag = 1;
-      else if (VL53_data[1] < stop_dst && !is_out_of_range[1]) stop_flag = 1;
-      else if ((VL53_data[2]-20) < stop_dst && !is_out_of_range[2]) stop_flag = 1;
-      else stop_flag = 0;
-    }
-    else {
-      if (VL53_data[i] < final_dst) stop_flag = 1;
-    }
-  }
-}
-
-void VL53::closest() {
-  int MinDst = 9999;
-  for(int i = 0; i < 3; i++) {
-    if (VL53_data[i] < MinDst) {
-      MinDst = VL53_data[i];
-      closest_num = i;
-    } 
-  }
-}
-
-void VL53::control (){
-  read();
-  avoid(VL53_flag);
-  while(Serial.available() > 0) Serial.read();
-  print();
 }

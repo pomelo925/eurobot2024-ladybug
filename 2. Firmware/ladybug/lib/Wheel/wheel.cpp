@@ -5,7 +5,6 @@
 WHEEL Wheel;
 
 
-
 void WHEEL::setup(){
   pinMode(DIGITAL_GPIO_05, OUTPUT);
   pinMode(DIGITAL_GPIO_16, OUTPUT);
@@ -25,7 +24,9 @@ void WHEEL::moveDirect(float time){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
-  Serial.print("\n[WHEEL] Move Direct\n");
+  Serial.print("\n[WHEEL] Move Direct : ");
+  Serial.print(time);
+  Serial.print(" sec\n");
 
   while(millis() - startTime < targetTime){
     if(WHEEL_PRINT){

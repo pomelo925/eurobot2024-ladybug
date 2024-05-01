@@ -29,9 +29,6 @@ public:
     void setup();
     void read();
     void print();
-    void avoid(int flag[3]);
-    void closest();
-    void control();
 };
 
 extern VL53 vl53;

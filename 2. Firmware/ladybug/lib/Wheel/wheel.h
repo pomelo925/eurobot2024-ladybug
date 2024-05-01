@@ -4,7 +4,7 @@
 #define DIGITAL_GPIO_05 5
 #define DIGITAL_GPIO_16 16
 
-#define WHEEL_PRINT false
+#define WHEEL_PRINT true
 
 class WHEEL{
 public:

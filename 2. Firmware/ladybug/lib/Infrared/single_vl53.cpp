@@ -5,6 +5,10 @@ Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 
 SINGLEVL53 SingleVL53;
 
+
+/**
+ * @brief 初始化 VL53L0X
+ */
 void SINGLEVL53::setup() {
   Serial.begin(115200);
 
@@ -14,6 +18,10 @@ void SINGLEVL53::setup() {
   }
 }
 
+
+/**
+ * @brief 拿 VL530X 量測距離
+ */
 void get_range(){
   VL53L0X_RangingMeasurementData_t measure;
    

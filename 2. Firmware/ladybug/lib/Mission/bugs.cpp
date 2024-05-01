@@ -7,6 +7,9 @@
 
 BUGS Bugs;
 
+/**
+ * @brief 瓢蟲任務劇本
+ */
 void BUGS::ID_1_run(){
   Serial.println("\n[MISSION] ID 1 Run !!\n");
 
@@ -22,7 +25,7 @@ void BUGS::ID_1_run(){
 void BUGS::ID_2_run(){
   Serial.println("\n[MISSION] ID 2 Run !!\n");
 
-  Wheel.moveDirect(5);
+  Wheel.moveDirect(20);
 }
 
 void BUGS::ID_3_run(){
