@@ -13,9 +13,9 @@ BUGS Bugs;
 void BUGS::ID_1_run(){
   Serial.println("\n[MISSION] ID 1 Run !!\n");
 
-  Wheel.moveDirect(3);
-  Wheel.rotateClockwise(3);
-  Wheel.rotateCounterClockwise(3);
+  Wheel.moveDirect(2);
+  Wheel.rotateClockwise(1);
+  Wheel.rotateCounterClockwise(1);
   ESP_Servo.moveTo(0);
   delay(5000);
   ESP_Servo.moveTo(180);

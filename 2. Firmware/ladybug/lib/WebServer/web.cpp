@@ -1,39 +1,9 @@
 #include <web.h>
 
 int WEBSERVER::readySignal = 0;
-
-const char index_html[] PROGMEM = R"rawliteral(
-<!DOCTYPE HTML><html>
-<head>
-  <title>DIT-Ladybug</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="data:,">
-  <style>
-    html {font-family: Arial; display: inline-block; text-align: center;}
-    h2 {font-size: 3.0rem;}
-    p {font-size: 3.0rem;}
-    body {max-width: 600px; margin:0px auto; padding-bottom: 25px;}
-    .switch {position: relative; display: inline-block; width: 120px; height: 68px} 
-    .switch input {display: none}
-    .slider {position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; border-radius: 6px}
-    .slider:before {position: absolute; content: ""; height: 52px; width: 52px; left: 8px; bottom: 8px; background-color: #fff; -webkit-transition: .4s; transition: .4s; border-radius: 3px}
-    input:checked+.slider {background-color: #DE272C}
-    input:checked+.slider:before {-webkit-transform: translateX(52px); -ms-transform: translateX(52px); transform: translateX(52px)}
-  </style>
-</head>
-<body>
-  <h2>Eurobot 2024</h2>
-  %BUTTONPLACEHOLDER%
-<script>function toggleCheckbox(element) {
-  var xhr = new XMLHttpRequest();
-  if(element.checked){ xhr.open("GET", "/updates?output="+element.id+"&state=1", true); }
-  else { xhr.open("GET", "/updates?output="+element.id+"&state=0", true); }
-  xhr.send();
-}
-</script>
-</body>
-</html>
-)rawliteral";
+IPAddress local_IP(192, 168, 8, 51);
+IPAddress gateway(192, 168, 8, 1);
+IPAddress subnet(255, 255, 255, 0);
 
 // Replaces placeholder with button section in your web page
 String WEBSERVER::processor(const String& var) {
@@ -54,30 +24,31 @@ String WEBSERVER::outputState(int output) {
 
 void WEBSERVER::initWiFi() {
   WiFi.mode(WIFI_STA);
+  if (!WiFi.config(local_IP, gateway, subnet)) {
+    Serial.println("STA Failed to configure");
+  }
   WiFi.begin(_ssid, _password);
+
   Serial.print("Connecting to WiFi ..");
   while (WiFi.status() != WL_CONNECTED) {
-    Serial.print('.');
-    delay(1000);
+    Serial.print('.'); delay(1000);
   }
+
   if (!MDNS.begin(_hostname)) {
     Serial.println("Error starting mDNS");
     return;
   }
   Serial.println(WiFi.localIP());
+  
   /* Place Your WiFi Ready things here  */ 
 
   /*              END                    */
 }
 
 
-void WEBSERVER::setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
+void WEBSERVER::startup(AsyncWebServer &server) {
+  pinMode(2, OUTPUT);
   initWiFi();
-
-  Serial.println("SEXXXX");
-  AsyncWebServer server(80);
-  Serial.println("Three some");
 
   // Route for root / web page
   server.on("/", HTTP_GET, [this](AsyncWebServerRequest *request){
@@ -88,15 +59,14 @@ void WEBSERVER::setup() {
   server.on("/updates", HTTP_GET, [](AsyncWebServerRequest* request){
     String inputMessage1;
     if (request->hasParam("output")) {
-      inputMessage1 = request->getParam("output")->value();
-      if (inputMessage1.toInt() == 1) readySignal = inputMessage1.toInt();
-      else inputMessage1 = "No message se nt";
+      inputMessage1 = request->getParam("state")->value();
+      readySignal = inputMessage1.toInt();
+      // Serial.print("ReadySignal: ");
+      // Serial.println(readySignal);
     } // Add this closing brace
     request->send(200, "text/plain", "OK");
   });
-  Serial.println("Four some");
-  AsyncElegantOTA.begin(&server);  // Start ElegantOTA
-  Serial.println("Fork");
+
+  AsyncElegantOTA.begin(&server);  
   server.begin();
-  Serial.println("NSFH");
 }
