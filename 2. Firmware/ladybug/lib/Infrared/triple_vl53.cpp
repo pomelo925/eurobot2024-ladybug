@@ -5,13 +5,13 @@
 #define stop_dst 50
 #define final_dst 100
 
-VL53 vl53;
+TRIPLE_VL53 Triple_vl53;
 
 
 /**
- * @brief 分配三個 VL53L0X 的 ID/address
+ * @brief 分配 VL53L0X 的 ID/address
  */
-void VL53::setID(){
+void TRIPLE_VL53::setID(){
   for (int i = 0; i < 3; i++) digitalWrite(SHT_LOX[i], LOW);    
   delay(10);
   for (int i = 0; i < 3; i++) digitalWrite(SHT_LOX[i], HIGH);    
@@ -20,41 +20,45 @@ void VL53::setID(){
   // activating LOX1 and reseting LOX2
   digitalWrite(SHT_LOX[0], HIGH);
   for (int i = 1; i < 3; i++) digitalWrite(SHT_LOX[i], LOW); 
-  delay(10);   
-
-  // initing LOX1
-  if(!lox1.begin(LOX1_ADDRESS)) {
-    Serial.println(F("Failed to boot first VL53L0X"));
-    // while(1);
-  }
+  delay(10); 
+  if(!lox1.begin(LOX1_ADDRESS)) Serial.println(F("[TRIPLE_VL53] Failed to boot VL53L0X [0]"));
+  else Serial.println(F("[TRIPLE_VL53] VL53_0 set ID done."));
 
   // activating LOX2
   digitalWrite(SHT_LOX[1], HIGH);
   delay(10);
-
-  //initing LOX2
-  if(!lox2.begin(LOX2_ADDRESS)) {
-    Serial.println(F("Failed to boot second VL53L0X"));
-    // while(1);
-  }
+  if(!lox2.begin(LOX2_ADDRESS)) Serial.println(F("[TRIPLE_VL53] Failed to boot VL53L0X [1]"));
+  else Serial.println(F("[TRIPLE_VL53] VL53_1 set ID done."));  
 
   // activating LOX3
   digitalWrite(SHT_LOX[2], HIGH);
   delay(10);
+  if(!lox3.begin(LOX3_ADDRESS)) Serial.println(F("[TRIPLE_VL53] Failed to boot VL53L0X [2]"));
+  else Serial.println(F("[TRIPLE_VL53] VL53_2 set ID done."));
 
-  //initing LOX3
-  if(!lox3.begin(LOX3_ADDRESS)) {
-    Serial.println(F("Failed to boot third VL53L0X"));
-    // while(1);
-  }  
-  Serial.println(F("VL53 set ID done."));
+}
+
+
+void TRIPLE_VL53::singleSetup(){
+  // activating LOX1
+  if(!lox.begin()) Serial.println(F("[TRIPLE_VL53][SINGLE] Failed to boot VL53L0X !"));
+  else Serial.println(F("[TRIPLE_VL53][SINGLE] VL53 set ID done."));
+  lox.startRangeContinuous();
+}
+
+
+void TRIPLE_VL53::singleread(){
+  if(lox.isRangeComplete()){
+    VL53_data[0]=lox.readRange();
+    Serial.println(VL53_data[0]);
+  }
 }
 
 
 /**
  * @brief Vl530X initialize
  */
-void VL53::setup() {
+void TRIPLE_VL53::setup() {
   for (int i = 0; i < 3; i++)  pinMode(SHT_LOX[i], OUTPUT);
   for (int i = 0; i < 3; i++)  digitalWrite(SHT_LOX[i], LOW);
   
@@ -65,7 +69,7 @@ void VL53::setup() {
 /**
  * @brief Vl530X 讀取距離
  */
-void VL53::read() {
+void TRIPLE_VL53::read() {
   for (int i = 0; i < 3; i++) is_out_of_range[i] = 0;
   lox1.rangingTest(&measure1, false); // pass in 'true' to get debug data printout!
   lox2.rangingTest(&measure2, false); // pass in 'true' to get debug data printout!
@@ -93,7 +97,7 @@ void VL53::read() {
 /**
  * @brief 列印三個 VL53L0X 的距離
  */
-void VL53::print() {
+void TRIPLE_VL53::print() {
   if (ReadBefore){
     for (int i=2; i>=0; i--) {   
       Serial.print(VL53_data[i]);
@@ -102,3 +106,4 @@ void VL53::print() {
     Serial.print("\r"); 
   }
 }
+

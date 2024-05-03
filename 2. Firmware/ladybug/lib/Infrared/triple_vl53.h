@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <Adafruit_VL53L0X.h>
 
-class VL53 {
+class TRIPLE_VL53 {
 public:
     // Constants
     const int SHT_LOX[3] = {25, 27, 32};
@@ -17,6 +17,7 @@ public:
     // Variables
     int VL53_data[3], VL53_flag[3] = {1}, is_out_of_range[3] = {0}, ReadBefore = 0, closest_num = 0, stop_flag = 0, go_flag = -2;
     int Is2ndMode, BugNum;
+    Adafruit_VL53L0X lox;
     Adafruit_VL53L0X lox1;
     Adafruit_VL53L0X lox2;
     Adafruit_VL53L0X lox3;
@@ -29,8 +30,10 @@ public:
     void setup();
     void read();
     void print();
+    void singleSetup();
+    void singleread();
 };
 
-extern VL53 vl53;
+extern TRIPLE_VL53 Triple_vl53;
 
 #endif

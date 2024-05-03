@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <mission.h>
+#include <triple_vl53.h>
 
 /**
  * @brief 根據 _id 執行對應 Bugs 任務
@@ -7,29 +8,53 @@
 void MISSION::run(){
   switch(_id) {
   case 1: 
-    Bugs.ID_1_run(); break;
+    Triple_vl53.setup();
+    Bugs.ID_1_run(_color); break;
+
   case 2:
-    Bugs.ID_2_run(); break;
+    Triple_vl53.setup();
+    Bugs.ID_2_run(_color); break;
+
   case 3: 
-    Bugs.ID_3_run(); break;
+    Triple_vl53.setup();
+    Bugs.ID_3_run(_color); break;
+
   case 4:
-    Bugs.ID_4_run(); break;
+    Triple_vl53.setup();
+    Bugs.ID_4_run(_color); break;
+
   case 5: 
-    Bugs.ID_5_run(); break;
+    Triple_vl53.singleSetup();
+    Bugs.ID_5_run(_color); break;
+
   case 6:
-    Bugs.ID_6_run(); break;
+    Triple_vl53.singleSetup();
+    Bugs.ID_6_run(_color); break;
+
   case 7: 
-    Bugs.ID_7_run(); break;
+    Triple_vl53.setup();
+    Bugs.ID_7_run(_color); break;
+
   case 8:
-    Bugs.ID_8_run(); break;
+    Triple_vl53.setup();
+    Bugs.ID_8_run(_color); break;
+
   case 9: 
-    Bugs.ID_9_run(); break;
+    Triple_vl53.setup();
+    Bugs.ID_9_run(_color); break;
+
   case 10:
-    Bugs.ID_10_run(); break;
+    Triple_vl53.setup();
+    Bugs.ID_10_run(_color); break;
+
   case 11: 
-    Bugs.ID_11_run(); break;
+    Triple_vl53.singleSetup();
+    Bugs.ID_11_run(_color); break;
+
   case 12:
-    Bugs.ID_12_run(); break;
+    Triple_vl53.singleSetup();
+    Bugs.ID_12_run(_color); break;
+
   default:
     Serial.print("\n[MISSION][E] No such BugsID\n");
   }             

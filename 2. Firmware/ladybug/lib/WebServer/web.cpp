@@ -1,7 +1,9 @@
 #include <web.h>
 
 int WEBSERVER::readySignal = 0;
-IPAddress local_IP(192, 168, 8, 51);
+
+
+IPAddress local_IP(192, 168, 8, 57);
 IPAddress gateway(192, 168, 8, 1);
 IPAddress subnet(255, 255, 255, 0);
 

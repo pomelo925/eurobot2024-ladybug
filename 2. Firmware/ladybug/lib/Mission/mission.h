@@ -6,12 +6,13 @@
 
 class MISSION{
 public:
-  MISSION(int id): _id(id) {};
+  MISSION(int id, int color): _id(id), _color(color) {};
 
   void run();
 
 private:
   int _id;
+  int _color;
 };
 
 extern MISSION Mission;

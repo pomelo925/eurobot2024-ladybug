@@ -1,8 +1,8 @@
 #ifndef _WHEEL_H_
 #define _WHEEL_H_
 
-#define DIGITAL_GPIO_05 5
-#define DIGITAL_GPIO_16 16
+#define MOTOR_L 5
+#define MOTOR_R 16
 
 #define WHEEL_PRINT true
 
@@ -11,17 +11,26 @@ public:
   void moveDirect(float time);
   void rotateClockwise(float time);
   void rotateCounterClockwise(float time);
+
+  void moveDirect2(float dist);
+  void rotateClockwise2(float angle);
+  void rotateCounterClockwise2(float angle);
+
+  void zero_cali();
   bool checkObstacle();
 
-  WHEEL(){
+  WHEEL(){ 
     setup();
   };
 
 private:
-// 速度控制內部參數 
-  const int _DIGITAL_HALF_SEC_MS=30;
-  
+  static constexpr float _wheel_radius = 0.21; // meter
+  static constexpr float _wheel_perimeter = 2 * 3.14159 * _wheel_radius;
+
+  static constexpr int _checkpoint_steps = 12; // calib every 4 steps
+
   void setup();
+  void stepsCheckpoint(int _checkpoint_steps);
 };
 
 extern WHEEL Wheel;

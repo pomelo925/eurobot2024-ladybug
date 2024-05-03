@@ -10,6 +10,7 @@
 class WEBSERVER{
 public:
   static int readySignal;
+  static int color;
   WEBSERVER(String ssid, String password, String hostname, AsyncWebServer &server): _ssid(ssid), _password(password), _hostname(hostname){
     startup(server);
   };
