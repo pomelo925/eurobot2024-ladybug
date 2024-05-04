@@ -1,28 +1,16 @@
 #include <web.h>
 
 int WEBSERVER::readySignal = 0;
+int WEBSERVER::color = -1;
 
-
-IPAddress local_IP(192, 168, 8, 57);
+IPAddress local_IP(192, 168, 8, 52);
 IPAddress gateway(192, 168, 8, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 // Replaces placeholder with button section in your web page
 String WEBSERVER::processor(const String& var) {
-  if (var == "BUTTONPLACEHOLDER") {
-    String buttons = "";
-    buttons += "<h4>ReadySignal</h4><label class=\"switch\"><input type=\"checkbox\" onchange=\"toggleCheckbox(this)\" id=\"1\" " + outputState(1) + "><span class=\"slider\"></span></label>";
-    return buttons;
-  }
   return String();
 }
-
-
-String WEBSERVER::outputState(int output) {
-  if (digitalRead(output)) return "checked";
-  else return "";
-}
-
 
 void WEBSERVER::initWiFi() {
   WiFi.mode(WIFI_STA);
@@ -57,16 +45,17 @@ void WEBSERVER::startup(AsyncWebServer &server) {
     request->send_P(200, "text/html", index_html, [this](const String& var) { return this->processor(var); });
   });
 
-  // Send a GET request to <ESP_IP>/updates?output=<inputMessage1>&state=<inputMessage2>
-  server.on("/updates", HTTP_GET, [](AsyncWebServerRequest* request){
-    String inputMessage1;
-    if (request->hasParam("output")) {
-      inputMessage1 = request->getParam("state")->value();
-      readySignal = inputMessage1.toInt();
-      // Serial.print("ReadySignal: ");
-      // Serial.println(readySignal);
-    } // Add this closing brace
-    request->send(200, "text/plain", "OK");
+  server.on("/updates", HTTP_GET, [this](AsyncWebServerRequest* request) { // Capture 'this' pointer
+    String inputMessage1, inputMessage2;
+    if (request->hasParam(PARAM_INPUT_1)) {
+      inputMessage1 = request->getParam(PARAM_INPUT_1)->value();
+      inputMessage2 = request->getParam(PARAM_INPUT_2)->value();
+      color = inputMessage1.toInt();
+      readySignal = inputMessage2.toInt();
+    } else {
+      inputMessage1 = "No message sent";
+    }
+    request->send(200, "text/plain", "DIT Robotics");
   });
 
   AsyncElegantOTA.begin(&server);  

@@ -4,33 +4,26 @@
 #define MOTOR_L 5
 #define MOTOR_R 16
 
-#define WHEEL_PRINT true
-
 class WHEEL{
 public:
-  void moveDirect(float time);
-  void rotateClockwise(float time);
-  void rotateCounterClockwise(float time);
+  void moveDirect(float time, bool single_vl53);
+  void rotateClockwise(float time, bool single_vl53);
+  void rotateCounterClockwise(float time, bool single_vl53);
+
 
   void moveDirect2(float dist);
-  void rotateClockwise2(float angle);
-  void rotateCounterClockwise2(float angle);
+  void rotateClockwise2(int steps);
+  void rotateCounterClockwise2(int steps);
 
   void zero_cali();
   bool checkObstacle();
-
-  WHEEL(){ 
-    setup();
-  };
+  
+  void setup();
 
 private:
-  static constexpr float _wheel_radius = 0.21; // meter
+  const bool _obstacle_avoidance = true;
+  static constexpr float _wheel_radius = 0.021; // meter
   static constexpr float _wheel_perimeter = 2 * 3.14159 * _wheel_radius;
-
-  static constexpr int _checkpoint_steps = 12; // calib every 4 steps
-
-  void setup();
-  void stepsCheckpoint(int _checkpoint_steps);
 };
 
 extern WHEEL Wheel;

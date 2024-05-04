@@ -39,24 +39,8 @@ void TRIPLE_VL53::setID(){
 }
 
 
-void TRIPLE_VL53::singleSetup(){
-  // activating LOX1
-  if(!lox.begin()) Serial.println(F("[TRIPLE_VL53][SINGLE] Failed to boot VL53L0X !"));
-  else Serial.println(F("[TRIPLE_VL53][SINGLE] VL53 set ID done."));
-  lox.startRangeContinuous();
-}
-
-
-void TRIPLE_VL53::singleread(){
-  if(lox.isRangeComplete()){
-    VL53_data[0]=lox.readRange();
-    Serial.println(VL53_data[0]);
-  }
-}
-
-
 /**
- * @brief Vl530X initialize
+ * @brief Vl530X 初始化
  */
 void TRIPLE_VL53::setup() {
   for (int i = 0; i < 3; i++)  pinMode(SHT_LOX[i], OUTPUT);
@@ -105,5 +89,18 @@ void TRIPLE_VL53::print() {
     }
     Serial.print("\r"); 
   }
+}
+
+
+/**
+ * @brief  檢查是否有障礙物
+ * @return true 表示有障礙物
+ */
+bool TRIPLE_VL53::checkObstacle() {
+  Triple_vl53.read();
+  for(auto &value : Triple_vl53.VL53_data) {
+    if(value <= 200 && value > 0) return true;
+  }
+  return false;
 }
 

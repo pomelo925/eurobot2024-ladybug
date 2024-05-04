@@ -17,8 +17,8 @@ public:
   void ID_12_run(int color);
 
 private:
-  static const int _YELLOW = 0;
-  static const int _BLUE = 1;
+  static const int _BLUE = 0;
+  static const int _YELLOW = 1;
 };
 
 
