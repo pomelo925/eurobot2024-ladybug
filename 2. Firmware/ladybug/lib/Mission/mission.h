@@ -6,13 +6,15 @@
 
 class MISSION{
 public:
-  MISSION(int id, int color): _id(id), _color(color) {};
+  MISSION(int id, int color, bool HOMOLOGATION_MODE): \
+   _id(id), _color(color), _homo_mode{HOMOLOGATION_MODE}{};
 
   void run();
 
 private:
   int _id;
   int _color;
+  bool _homo_mode;
 };
 
 extern MISSION Mission;

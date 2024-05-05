@@ -2,9 +2,6 @@
 #include <Adafruit_VL53L0X.h>
 #include <triple_vl53.h>
 
-#define stop_dst 50
-#define final_dst 100
-
 TRIPLE_VL53 Triple_vl53;
 
 
@@ -98,8 +95,12 @@ void TRIPLE_VL53::print() {
  */
 bool TRIPLE_VL53::checkObstacle() {
   Triple_vl53.read();
+  // for(auto &value : Triple_vl53.VL53_data) {
+  //   Serial.print(value); Serial.print(" : ");
+  // }
+  Serial.print("\r");
   for(auto &value : Triple_vl53.VL53_data) {
-    if(value <= 200 && value > 0) return true;
+    if(value <= 220 && value > 0) return true;
   }
   return false;
 }

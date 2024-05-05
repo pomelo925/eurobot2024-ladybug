@@ -6,7 +6,7 @@
 
 class WHEEL{
 public:
-  void moveDirect(float time, bool single_vl53);
+  void moveDirect(const float time, const bool single_vl53);
   void rotateClockwise(float time, bool single_vl53);
   void rotateCounterClockwise(float time, bool single_vl53);
 

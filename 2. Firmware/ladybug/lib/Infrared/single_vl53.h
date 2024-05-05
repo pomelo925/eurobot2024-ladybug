@@ -7,7 +7,7 @@
 class SINGLE_VL53 {
 public:
   void setup();
-  int read();
+  uint16_t read();
   bool checkObstacle();
 
 private:

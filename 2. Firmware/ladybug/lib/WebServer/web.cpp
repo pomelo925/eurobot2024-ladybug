@@ -3,7 +3,7 @@
 int WEBSERVER::readySignal = 0;
 int WEBSERVER::color = -1;
 
-IPAddress local_IP(192, 168, 8, 52);
+IPAddress local_IP(192, 168, 8, 51);
 IPAddress gateway(192, 168, 8, 1);
 IPAddress subnet(255, 255, 255, 0);
 
@@ -14,9 +14,7 @@ String WEBSERVER::processor(const String& var) {
 
 void WEBSERVER::initWiFi() {
   WiFi.mode(WIFI_STA);
-  if (!WiFi.config(local_IP, gateway, subnet)) {
-    Serial.println("STA Failed to configure");
-  }
+  if (!WiFi.config(local_IP, gateway, subnet)) Serial.println("STA Failed to configure");
   WiFi.begin(_ssid, _password);
 
   Serial.print("Connecting to WiFi ..");

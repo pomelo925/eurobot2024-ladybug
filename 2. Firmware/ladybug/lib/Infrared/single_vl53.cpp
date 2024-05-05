@@ -18,8 +18,12 @@ void SINGLE_VL53::setup(){
  * @brief Vl530X 讀值
  * @return 距離，-1 表示無資訊
  */
-int SINGLE_VL53::read(){
-  if(lox.isRangeComplete()) return VL53_data=lox.readRange();
+uint16_t SINGLE_VL53::read(){
+  VL53L0X_RangingMeasurementData_t measure;
+  lox.rangingTest(&measure, false);
+  
+  delay(10);
+  if (measure.RangeStatus != 4) return measure.RangeMilliMeter;
   else return -1;
 }
 
@@ -29,7 +33,9 @@ int SINGLE_VL53::read(){
  * @return true 表示有障礙物
  */
 bool SINGLE_VL53::checkObstacle() {
-  const int val = read();
+  const uint16_t val = read();
+  Serial.print("[Check Obstacle] ");
+  Serial.println(val); Serial.print("\r");
 
   if(val>0 and val<=200) return true;
   return false;
