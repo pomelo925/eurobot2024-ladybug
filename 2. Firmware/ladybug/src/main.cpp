@@ -1,12 +1,13 @@
 #include <Arduino.h>
 #include <web.h>
 #include <mission.h>
+#include <wheel.h>
  
 /******** USER DEFINED *********/
 #define SSID "DIT_8C58" // mDNS Hostname
 #define PWD "ditrobotics" // mDNS Hostname
-#define HOSTNAME "ladybug-9" // mDNS Hostname
-#define LADYBUG_ID 9 // Mission ID
+#define HOSTNAME "ladybug-3" // mDNS Hostname
+#define LADYBUG_ID 3// Mission ID
 /*******************************/
 
 AsyncWebServer server(80);
@@ -14,11 +15,17 @@ AsyncWebServer server(80);
 void setup() {
   Serial.begin(115200);
 
+/* 1. Initialization */
   WEBSERVER Webserver(SSID, PWD, HOSTNAME, server);
+  Wheel.setup();
+  Wheel.zero_cali();
   
+/* 2. Wait for request */
   Serial.println("[MAIN] Wait For Request ...");
   while(!Webserver.readySignal) delay(500);
 
+
+/* 3. Start Mission */
   Serial.println("[MAIN] Mission Start !");
   MISSION Mission(LADYBUG_ID, Webserver.color);
   Mission.run();

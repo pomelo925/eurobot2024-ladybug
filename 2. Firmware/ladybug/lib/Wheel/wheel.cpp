@@ -174,14 +174,15 @@ void WHEEL::rotateCounterClockwise(const float time, const bool single_vl53){
 
 /**
  * @brief  直走，加入光閘，調用 FreeRTOS 閉路控制
- * @param dist 距離
+ * @param time 時間
  */
-void WHEEL::moveDirect2(const float dist){
+ 
+void WHEEL::moveDirect2(const float time){
   Serial.print("\n[WHEEL][Move Direct 2] Start !\n");
 
 /* Calculate Total Steps*/
-  const int steps = 2*(dist/_wheel_perimeter);
-  Serial.print("Total Steps : "); Serial.println(steps);
+  unsigned long startTime = millis();
+  unsigned long targetTime = time * 1000; 
 
 /* FreeRTOS*/
   static TaskHandle_t leftTaskHandle = NULL;
@@ -236,12 +237,12 @@ void WHEEL::moveDirect2(const float dist){
   if (!checkObstacleTaskHandle) xTaskCreatePinnedToCore(checkObstacleTask, "CheckObstacleTask", 10000, _isBlockedPtr, 1, &checkObstacleTaskHandle, 1);
 
 /* Wait until both L/R steps reach the target */   
-  while (L_steps<steps || R_steps<steps) {
-    // Serial.println("a");
+  while (millis() - startTime < targetTime) {
+    unsigned long waitingTimeStart = millis();
     while(_isBlocked){
-      // Serial.println("b");
       if(!_isBlocked) break;
     };
+    targetTime += ( millis() - waitingTimeStart );
 
     // Serial.print("L_steps: "); Serial.print(L_steps);
     // Serial.print("\tR_stweps: "); Serial.print(R_steps);
@@ -249,19 +250,19 @@ void WHEEL::moveDirect2(const float dist){
 
     if (L_steps < R_steps) {
       digitalWrite(MOTOR_L, HIGH); digitalWrite(MOTOR_R, LOW);
-      delay(3);
+      delay(50);
       digitalWrite(MOTOR_L, LOW);
-      delay(2);
+      delay(5);
     } else if (R_steps < L_steps) {
       digitalWrite(MOTOR_L, LOW); digitalWrite(MOTOR_R, HIGH);
-      delay(3);
+      delay(50);
       digitalWrite(MOTOR_R, LOW);
-      delay(2);
+      delay(5);
     } else {
       digitalWrite(MOTOR_L, HIGH); digitalWrite(MOTOR_R, HIGH);
-      delay(3);
+      delay(45);
       digitalWrite(MOTOR_L, LOW); digitalWrite(MOTOR_R, LOW);
-      delay(2);
+      delay(20);
     }
     vTaskDelay(pdMS_TO_TICKS(1));
   }
@@ -291,7 +292,7 @@ void WHEEL::moveDirect2(const float dist){
  */
 void WHEEL::rotateClockwise2(const int steps){
   Serial.print("[WHEEL][Rotate Clockwise 2] Start !\n");
-  zero_cali();
+  force_zero_cali();
 
   int falseCount = 0;
   bool previousState = Glv.get_glv_r();
@@ -301,8 +302,8 @@ void WHEEL::rotateClockwise2(const int steps){
   while(true){
     bool currentState = Glv.get_glv_r();
     
-    digitalWrite(MOTOR_R, HIGH); delay(1);
-    digitalWrite(MOTOR_R, LOW); delay(3);
+    digitalWrite(MOTOR_R, HIGH); delay(15);
+    digitalWrite(MOTOR_R, LOW); delay(200);
     
     if(previousState && !currentState){
       falseCount++;
@@ -323,7 +324,8 @@ void WHEEL::rotateClockwise2(const int steps){
  */
 void WHEEL::rotateCounterClockwise2(const int steps){
   Serial.print("[WHEEL][Rotate Counter Clockwise 2] Start !\n");
-  zero_cali();
+  
+  force_zero_cali();
 
   int falseCount = 0;
   bool previousState = Glv.get_glv_l();
@@ -332,8 +334,8 @@ void WHEEL::rotateCounterClockwise2(const int steps){
   while(true){
     bool currentState = Glv.get_glv_l();
 
-    digitalWrite(MOTOR_L, HIGH); delay(1);
-    digitalWrite(MOTOR_L, LOW); delay(3);
+    digitalWrite(MOTOR_L, HIGH); delay(15);
+    digitalWrite(MOTOR_L, LOW); delay(5);
     
     if(previousState && !currentState){
       falseCount++;
@@ -355,15 +357,38 @@ void WHEEL::zero_cali(){
   
   // Right Side Calibration
   while(Glv.get_glv_r()){
-    digitalWrite(MOTOR_R, HIGH); delay(1);
-    digitalWrite(MOTOR_R, LOW); delay(3);
+    digitalWrite(MOTOR_R, HIGH); delay(4);
+    digitalWrite(MOTOR_R, LOW); delay(100);
   }
 
   // Left Side Calibration
   while(Glv.get_glv_l()){
-    digitalWrite(MOTOR_L, HIGH); delay(1);
-    digitalWrite(MOTOR_L, LOW); delay(3);
+    digitalWrite(MOTOR_L, HIGH); delay(4);
+    digitalWrite(MOTOR_L, LOW); delay(100);
   }
 
   Serial.println("[WHEEL] Calibration Done !");
+}
+
+
+
+/**
+ * @brief  強制零點校正，使兩輪皆處於 false 狀態
+ */
+void WHEEL::force_zero_cali(){
+  Serial.println("[WHEEL] Force Calibrating ...");
+  
+  // Right Side Calibration
+  while(Glv.get_glv_r()){
+    digitalWrite(MOTOR_R, HIGH); delay(25);
+    digitalWrite(MOTOR_R, LOW); delay(300);
+  }
+
+  // Left Side Calibration
+  while(Glv.get_glv_l()){
+    digitalWrite(MOTOR_L, HIGH); delay(25);
+    digitalWrite(MOTOR_L, LOW); delay(300);
+  }
+
+  Serial.println("[WHEEL] Force Calibration Done !");
 }

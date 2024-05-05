@@ -15,7 +15,7 @@ void BUGS::ID_1_run(const int color){
 
   if(color == _YELLOW){
     Serial.print("[MISSION] COLOR: Yellow\n");
-    Wheel.moveDirect(20, false);
+    Wheel.moveDirect2(20);
     return;
   }
 
@@ -31,14 +31,16 @@ void BUGS::ID_2_run(const int color){
   Serial.println("\n[MISSION] ID 2 Run !!\n");
   if(color == _YELLOW){
     Serial.print("[MISSION] COLOR: Yellow\n");
-    Wheel.moveDirect2(20);
+    Wheel.moveDirect2(0.04*3.1415926);
 
     return;
   }
 
   if(color == _BLUE){
     Serial.print("[MISSION] COLOR: Blue\n");
-    Wheel.moveDirect2(20);
+    Wheel.moveDirect2(1);
+    Wheel.rotateCounterClockwise2(1);
+    Wheel.moveDirect2(2);
     return;
   }
 
@@ -49,16 +51,18 @@ void BUGS::ID_3_run(const int color){
 
   if(color == _YELLOW){
     Serial.print("[MISSION] COLOR: Yellow\n");
-    Wheel.moveDirect(12, false);
+    Wheel.moveDirect2(30);
     return;
   }
 
+// OFFICIAL
   if(color == _BLUE){
     Serial.print("[MISSION] COLOR: Blue\n");
-    Wheel.moveDirect2(20);
+    Wheel.moveDirect2(2);
+    Wheel.rotateClockwise2(3);
+    Wheel.moveDirect2(1);
     return;
   }
-
 }
 
 void BUGS::ID_4_run(const int color){
@@ -66,7 +70,7 @@ void BUGS::ID_4_run(const int color){
 
   if(color == _YELLOW){
     Serial.print("[MISSION] COLOR: Yellow\n");
-    Wheel.moveDirect(12, false);
+    Wheel.moveDirect2(20);
     return;
   }
 
