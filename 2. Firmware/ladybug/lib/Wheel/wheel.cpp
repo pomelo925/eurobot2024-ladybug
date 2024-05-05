@@ -83,7 +83,7 @@ void WHEEL::moveDirect(const float time, const bool single_vl53){
  * @brief  順時鐘走，無配合光閘
  * @param time 行走時間
  */
-void WHEEL::rotateClockwise(float time, bool single_vl53){
+void WHEEL::rotateClockwise(const float time, const bool single_vl53){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
@@ -130,7 +130,7 @@ void WHEEL::rotateClockwise(float time, bool single_vl53){
  * @brief  逆時鐘走，無配合光閘
  * @param time 行走時間
  */
-void WHEEL::rotateCounterClockwise(float time, bool single_vl53){
+void WHEEL::rotateCounterClockwise(const float time, const bool single_vl53){
 
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
@@ -176,7 +176,7 @@ void WHEEL::rotateCounterClockwise(float time, bool single_vl53){
  * @brief  直走，加入光閘，調用 FreeRTOS 閉路控制
  * @param dist 距離
  */
-void WHEEL::moveDirect2(float dist){
+void WHEEL::moveDirect2(const float dist){
   Serial.print("\n[WHEEL][Move Direct 2] Start !\n");
 
 /* Calculate Total Steps*/
@@ -287,7 +287,7 @@ void WHEEL::moveDirect2(float dist){
  * @brief  順時鐘走，加入光閘
  * @param steps steps 數量，光閘由 true 轉為 false 的間距視為一個 step
  */
-void WHEEL::rotateClockwise2(int steps){
+void WHEEL::rotateClockwise2(const int steps){
   Serial.print("[WHEEL][Rotate Clockwise 2] Start !\n");
   zero_cali();
 
@@ -319,7 +319,7 @@ void WHEEL::rotateClockwise2(int steps){
  * @brief  逆時鐘走，加入光閘
  * @param steps steps 數量，光閘由 true 轉為 false 的間距視為一個 step
  */
-void WHEEL::rotateCounterClockwise2(int steps){
+void WHEEL::rotateCounterClockwise2(const int steps){
   Serial.print("[WHEEL][Rotate Counter Clockwise 2] Start !\n");
   zero_cali();
 

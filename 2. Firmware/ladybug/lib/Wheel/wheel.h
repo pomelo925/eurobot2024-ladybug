@@ -7,16 +7,14 @@
 class WHEEL{
 public:
   void moveDirect(const float time, const bool single_vl53);
-  void rotateClockwise(float time, bool single_vl53);
-  void rotateCounterClockwise(float time, bool single_vl53);
+  void rotateClockwise(const float time, const  bool single_vl53);
+  void rotateCounterClockwise(const float time, const bool single_vl53);
 
-
-  void moveDirect2(float dist);
-  void rotateClockwise2(int steps);
-  void rotateCounterClockwise2(int steps);
+  void moveDirect2(const float dist);
+  void rotateClockwise2(const int steps);
+  void rotateCounterClockwise2(const int steps);
 
   void zero_cali();
-  bool checkObstacle();
   
   void setup();
 

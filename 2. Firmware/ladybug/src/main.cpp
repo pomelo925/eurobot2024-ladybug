@@ -7,8 +7,6 @@
 #define PWD "ditrobotics" // mDNS Hostname
 #define HOSTNAME "ladybug-1" // mDNS Hostname
 #define LADYBUG_ID 1 // Mission ID
-
-#define HOMOLOGATION_MODE false
 /*******************************/
 
 AsyncWebServer server(80);
@@ -22,7 +20,7 @@ void setup() {
   while(!Webserver.readySignal) delay(500);
 
   Serial.println("[MAIN] Mission Start !");
-  MISSION Mission(LADYBUG_ID, Webserver.color, HOMOLOGATION_MODE);
+  MISSION Mission(LADYBUG_ID, Webserver.color);
   Mission.run();
 }
 

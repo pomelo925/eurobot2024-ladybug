@@ -10,7 +10,7 @@ BUGS Bugs;
 /**
  * @brief 瓢蟲任務劇本，正式比賽版本 
  */
-void BUGS::ID_1_run(int color){
+void BUGS::ID_1_run(const int color){
   Serial.print("\n[MISSION] ID 1 Run !!\n");
 
   if(color == _YELLOW){
@@ -27,8 +27,7 @@ void BUGS::ID_1_run(int color){
 
 }
 
-
-void BUGS::ID_2_run(int color){
+void BUGS::ID_2_run(const int color){
   Serial.println("\n[MISSION] ID 2 Run !!\n");
   if(color == _YELLOW){
     Serial.print("[MISSION] COLOR: Yellow\n");
@@ -45,7 +44,7 @@ void BUGS::ID_2_run(int color){
 
 }
 
-void BUGS::ID_3_run(int color){
+void BUGS::ID_3_run(const int color){
   Serial.println("\n[MISSION] ID 3 Run !!\n");
 
   if(color == _YELLOW){
@@ -62,7 +61,7 @@ void BUGS::ID_3_run(int color){
 
 }
 
-void BUGS::ID_4_run(int color){
+void BUGS::ID_4_run(const int color){
   Serial.println("\n[MISSION] ID 3 Run !!\n");
 
   if(color == _YELLOW){
@@ -79,7 +78,7 @@ void BUGS::ID_4_run(int color){
 
 }
 
-void BUGS::ID_5_run(int color){
+void BUGS::ID_5_run(const int color){
   Serial.println("\n[MISSION] ID 5 Run !!\n");
 
   if(color == _YELLOW){
@@ -97,7 +96,7 @@ void BUGS::ID_5_run(int color){
 
 }
 
-void BUGS::ID_6_run(int color){
+void BUGS::ID_6_run(const int color){
   Serial.println("\n[MISSION] ID 6 Run !!\n");
 
   if(color == _YELLOW){
@@ -115,7 +114,7 @@ void BUGS::ID_6_run(int color){
 
 }
 
-void BUGS::ID_7_run(int color){
+void BUGS::ID_7_run(const int color){
   Serial.println("\n[MISSION] ID 7 Run !!\n");
 
   if(color == _YELLOW){
@@ -131,7 +130,7 @@ void BUGS::ID_7_run(int color){
   }
 }
 
-void BUGS::ID_8_run(int color){
+void BUGS::ID_8_run(const int color){
   Serial.println("\n[MISSION] ID 8 Run !!\n");
   
   if(color == _YELLOW){
@@ -146,7 +145,7 @@ void BUGS::ID_8_run(int color){
 
 }
 
-void BUGS::ID_9_run(int color){
+void BUGS::ID_9_run(const int color){
   Serial.println("\n[MISSION] ID 9 Run !!\n");
 
   if(color == _YELLOW){
@@ -161,7 +160,7 @@ void BUGS::ID_9_run(int color){
 
 }
 
-void BUGS::ID_10_run(int color){
+void BUGS::ID_10_run(const int color){
   Serial.println("\n[MISSION] ID 10 Run !!\n");
 
   if(color == _YELLOW){
@@ -182,7 +181,7 @@ void BUGS::ID_10_run(int color){
 
 }
 
-void BUGS::ID_11_run(int color){
+void BUGS::ID_11_run(const int color){
   Serial.println("\n[MISSION] ID 11 Run !!\n");
 
   if(color == _YELLOW){
@@ -200,7 +199,7 @@ void BUGS::ID_11_run(int color){
 
 }
 
-void BUGS::ID_12_run(int color){
+void BUGS::ID_12_run(const int color){
   Serial.println("\n[MISSION] ID 12 Run !!\n");
 
   if(color == _YELLOW){

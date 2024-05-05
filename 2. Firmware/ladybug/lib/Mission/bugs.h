@@ -3,18 +3,18 @@
 
 class BUGS{
 public:
-  void ID_1_run(int color);
-  void ID_2_run(int color);
-  void ID_3_run(int color);
-  void ID_4_run(int color);
-  void ID_5_run(int color);
-  void ID_6_run(int color);
-  void ID_7_run(int color);
-  void ID_8_run(int color);
-  void ID_9_run(int color);
-  void ID_10_run(int color);
-  void ID_11_run(int color);
-  void ID_12_run(int color);
+  void ID_1_run(const int color);
+  void ID_2_run(const int color);
+  void ID_3_run(const int color);
+  void ID_4_run(const int color);
+  void ID_5_run(const int color);
+  void ID_6_run(const int color);
+  void ID_7_run(const int color);
+  void ID_8_run(const int color);
+  void ID_9_run(const int color);
+  void ID_10_run(const int color);
+  void ID_11_run(const int color);
+  void ID_12_run(const int color);
 
 private:
   static const int _BLUE = 0;

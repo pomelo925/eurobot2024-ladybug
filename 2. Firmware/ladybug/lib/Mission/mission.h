@@ -6,8 +6,7 @@
 
 class MISSION{
 public:
-  MISSION(int id, int color, bool HOMOLOGATION_MODE): \
-   _id(id), _color(color), _homo_mode{HOMOLOGATION_MODE}{};
+  MISSION(int id, int color): _id(id), _color(color){};
 
   void run();
 

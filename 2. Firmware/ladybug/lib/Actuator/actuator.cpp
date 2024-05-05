@@ -17,7 +17,7 @@ void SERVO::attach_check(){
  * @brief 設定 SERVO 角度
  * @param angle 目標角度 (degree)
  */
-void SERVO::moveTo(float angle){
+void SERVO::moveTo(const float angle){
   esp_servo.write(angle);
   attach_check();
 } 
