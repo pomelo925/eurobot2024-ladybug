@@ -58,34 +58,33 @@ void TRIPLE_VL53::read() {
   
   // print sensor one reading
   if(measure1.RangeStatus != 4) {     // if not out of range
-    if ((measure1.RangeMilliMeter -= 0) > 0) VL53_data[0] = measure1.RangeMilliMeter;
+    if (measure1.RangeMilliMeter > 0) VL53_data[0] = measure1.RangeMilliMeter;
     else is_out_of_range[0] = 1;
   } else is_out_of_range[0] = 1;
+  
   // print sensor two reading
   if(measure2.RangeStatus != 4) {     // if not out of range
-    if ((measure2.RangeMilliMeter -= 0) > 0) VL53_data[1] = measure2.RangeMilliMeter;
+    if (measure2.RangeMilliMeter > 0) VL53_data[1] = measure2.RangeMilliMeter;
     else is_out_of_range[1] = 1;
   } else is_out_of_range[1] = 1;
+
   // print sensor three reading
   if(measure3.RangeStatus != 4) {     // if not out of range
-    if ((measure3.RangeMilliMeter -= 0) > 0) VL53_data[2] = measure3.RangeMilliMeter;
+    if (measure3.RangeMilliMeter > 0) VL53_data[2] = measure3.RangeMilliMeter;
     else is_out_of_range[2] = 1; 
   } else is_out_of_range[2] = 1;
-  ReadBefore = 1;
 }
 
 
 /**
  * @brief 列印三個 VL53L0X 的距離
  */
-void TRIPLE_VL53::print() {
-  if (ReadBefore){
-    for (int i=2; i>=0; i--) {   
+  void TRIPLE_VL53::print() {
+  for (int i=2; i>=0; i--) {   
       Serial.print(VL53_data[i]);
       if(i) Serial.print(F(":"));
-    }
-    Serial.print("\r"); 
   }
+  Serial.println();
 }
 
 
@@ -95,13 +94,14 @@ void TRIPLE_VL53::print() {
  */
 bool TRIPLE_VL53::checkObstacle() {
   Triple_vl53.read();
-  // for(auto &value : Triple_vl53.VL53_data) {
-  //   Serial.print(value); Serial.print(" : ");
-  // }
-  Serial.print("\r");
-  for(auto &value : Triple_vl53.VL53_data) {
-    if(value <= 220 && value > 0) return true;
+  // Triple_vl53.print();
+
+  if(is_out_of_range[0] and is_out_of_range[1] and is_out_of_range[2]) return false;
+  
+  for (auto &value : Triple_vl53.VL53_data) {
+    if (value >= 0 && value <= 200) return true;
   }
+
   return false;
 }
 

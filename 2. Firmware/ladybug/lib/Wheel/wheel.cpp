@@ -237,13 +237,15 @@ void WHEEL::moveDirect2(const float dist){
 
 /* Wait until both L/R steps reach the target */   
   while (L_steps<steps || R_steps<steps) {
+    // Serial.println("a");
     while(_isBlocked){
+      // Serial.println("b");
       if(!_isBlocked) break;
     };
 
-    Serial.print("L_steps: "); Serial.print(L_steps);
-    Serial.print("\tR_stweps: "); Serial.print(R_steps);
-    Serial.print("\r");
+    // Serial.print("L_steps: "); Serial.print(L_steps);
+    // Serial.print("\tR_stweps: "); Serial.print(R_steps);
+    // Serial.print("\r");
 
     if (L_steps < R_steps) {
       digitalWrite(MOTOR_L, HIGH); digitalWrite(MOTOR_R, LOW);

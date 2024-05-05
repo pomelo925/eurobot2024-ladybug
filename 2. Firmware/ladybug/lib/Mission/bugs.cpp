@@ -31,7 +31,7 @@ void BUGS::ID_2_run(const int color){
   Serial.println("\n[MISSION] ID 2 Run !!\n");
   if(color == _YELLOW){
     Serial.print("[MISSION] COLOR: Yellow\n");
-    Wheel.moveDirect(12, false);
+    Wheel.moveDirect2(20);
 
     return;
   }
@@ -150,11 +150,13 @@ void BUGS::ID_9_run(const int color){
 
   if(color == _YELLOW){
     Serial.print("[MISSION] COLOR: Yellow\n");
+    Wheel.moveDirect2(20);
     return;
   }
 
   if(color == _BLUE){
     Serial.print("[MISSION] COLOR: Blue\n");
+    Wheel.moveDirect(20, false);
     return;
   }
 

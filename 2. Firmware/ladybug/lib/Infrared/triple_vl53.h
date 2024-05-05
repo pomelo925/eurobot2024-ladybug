@@ -18,7 +18,7 @@ private:
     static const uint8_t LOX2_ADDRESS = 0x31;
     static const uint8_t LOX3_ADDRESS = 0x32;
 
-    int VL53_data[3], VL53_flag[3] = {1}, is_out_of_range[3] = {0}, ReadBefore = 0, closest_num = 0, stop_flag = 0, go_flag = -2;
+    int VL53_data[3], VL53_flag[3] = {1}, is_out_of_range[3] = {0};
     int Is2ndMode, BugNum;
 
     Adafruit_VL53L0X lox1;

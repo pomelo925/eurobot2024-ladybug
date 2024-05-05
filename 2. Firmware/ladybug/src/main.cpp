@@ -5,8 +5,8 @@
 /******** USER DEFINED *********/
 #define SSID "DIT_8C58" // mDNS Hostname
 #define PWD "ditrobotics" // mDNS Hostname
-#define HOSTNAME "ladybug-1" // mDNS Hostname
-#define LADYBUG_ID 1 // Mission ID
+#define HOSTNAME "ladybug-9" // mDNS Hostname
+#define LADYBUG_ID 9 // Mission ID
 /*******************************/
 
 AsyncWebServer server(80);
@@ -64,11 +64,11 @@ void loop(){
 
 
 // void loop(){
-//   Glv.read(); 
-//   digitalWrite(MOTOR_R, HIGH); digitalWrite(MOTOR_L, HIGH);
-//   delay(5);
-//   digitalWrite(MOTOR_R, LOW); digitalWrite(MOTOR_L, LOW);
-//   delay(15);
+//   Triple_vl53.checkObstacle(); 
+  // digitalWrite(MOTOR_R, HIGH); digitalWrite(MOTOR_L, HIGH);
+  // delay(5);
+  // digitalWrite(MOTOR_R, LOW); digitalWrite(MOTOR_L, LOW);
+  // delay(15);
 // }
 
 /***** 分隔線 *****/
