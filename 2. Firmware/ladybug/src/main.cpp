@@ -6,8 +6,8 @@
 /******** USER DEFINED *********/
 #define SSID "DIT_8C58" // mDNS Hostname
 #define PWD "ditrobotics" // mDNS Hostname
-#define HOSTNAME "ladybug-3" // mDNS Hostname
-#define LADYBUG_ID 3// Mission ID
+#define HOSTNAME "ladybug-11" // mDNS Hostname
+#define LADYBUG_ID 11// Mission ID
 /*******************************/
 
 AsyncWebServer server(80);
@@ -18,7 +18,7 @@ void setup() {
 /* 1. Initialization */
   WEBSERVER Webserver(SSID, PWD, HOSTNAME, server);
   Wheel.setup();
-  Wheel.zero_cali();
+  // Wheel.zero_cali();
   
 /* 2. Wait for request */
   Serial.println("[MAIN] Wait For Request ...");

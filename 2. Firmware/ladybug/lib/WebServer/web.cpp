@@ -3,7 +3,7 @@
 int WEBSERVER::readySignal = 0;
 int WEBSERVER::color = -1;
 
-IPAddress local_IP(192, 168, 8, 53);
+IPAddress local_IP(192, 168, 8, 61);
 IPAddress gateway(192, 168, 8, 1);
 IPAddress subnet(255, 255, 255, 0);
 

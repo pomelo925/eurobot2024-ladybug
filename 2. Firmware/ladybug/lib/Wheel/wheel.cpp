@@ -83,7 +83,7 @@ void WHEEL::moveDirect(const float time, const bool single_vl53){
  * @brief  順時鐘走，無配合光閘
  * @param time 行走時間
  */
-void WHEEL::rotateClockwise(const float time, const bool single_vl53){
+void WHEEL::rotateClockwise(const float time){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
@@ -91,38 +91,48 @@ void WHEEL::rotateClockwise(const float time, const bool single_vl53){
   Serial.print(time);
   Serial.print(" sec\n");
 
+  static TaskHandle_t checkObstacleTaskHandle = NULL;
+  volatile bool _isBlocked=false;
+  void* _isBlockedPtr = const_cast<void*>(static_cast<const void*>(const_cast<bool*>(&_isBlocked)));
+
+  auto checkObstacleTask = [](void* parameter) {
+    volatile bool* _isBlocked = static_cast<volatile bool*>(parameter);
+
+    while (true) {
+      if(Triple_vl53.checkObstacle()) {
+        *_isBlocked = true;
+        digitalWrite(MOTOR_L, LOW);
+        digitalWrite(MOTOR_R, LOW);
+      }
+      else *_isBlocked = false;
+      vTaskDelay(pdMS_TO_TICKS(1));
+    }
+  };
+
+  if (!checkObstacleTaskHandle) xTaskCreatePinnedToCore(checkObstacleTask, "CheckObstacleTask", 10000, _isBlockedPtr, 1, &checkObstacleTaskHandle, 1);
+
   while(millis() - startTime < targetTime){
-  // OBSTACLE
-  if(single_vl53){
-    if(Single_vl53.checkObstacle() and _obstacle_avoidance) {
-      digitalWrite(MOTOR_L, LOW);
-      digitalWrite(MOTOR_R, LOW);
-
-      unsigned long waitingTimeStart = millis();
-      while(Single_vl53.checkObstacle()) delay(10);;
-      targetTime += ( millis() - waitingTimeStart );
-    }
-  }
-  else{
-    if(Triple_vl53.checkObstacle() and _obstacle_avoidance) {
-      digitalWrite(MOTOR_L, LOW);
-      digitalWrite(MOTOR_R, LOW);
-
-      unsigned long waitingTimeStart = millis();
-      while(Triple_vl53.checkObstacle()) delay(10);;
-      targetTime += ( millis() - waitingTimeStart );
-    }
-  }
+    unsigned long waitingTimeStart = millis();
+    while(_isBlocked){
+      if(!_isBlocked) break;
+    };
+    targetTime += ( millis() - waitingTimeStart );
   
     digitalWrite(MOTOR_L, HIGH); digitalWrite(MOTOR_R, LOW);
-    delay(100);
+    delay(50);
     digitalWrite(MOTOR_L, LOW);
-    delay(2);
+    delay(150);
+
+    vTaskDelay(pdMS_TO_TICKS(1));
+  }
+
+  if (checkObstacleTaskHandle) {
+    vTaskDelete(checkObstacleTaskHandle);
+    checkObstacleTaskHandle = NULL;
   }
 
   digitalWrite(MOTOR_L, LOW);
   digitalWrite(MOTOR_R, LOW);
-
 }
 
 
@@ -130,45 +140,56 @@ void WHEEL::rotateClockwise(const float time, const bool single_vl53){
  * @brief  逆時鐘走，無配合光閘
  * @param time 行走時間
  */
-void WHEEL::rotateCounterClockwise(const float time, const bool single_vl53){
-
+void WHEEL::rotateCounterClockwise(const float time){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
-  Serial.print("[WHEEL] Rotate Counter Clockwise : ");
+  Serial.print("[WHEEL] Rotate Clockwise : ");
   Serial.print(time);
   Serial.print(" sec\n");
 
+  static TaskHandle_t checkObstacleTaskHandle = NULL;
+  volatile bool _isBlocked=false;
+  void* _isBlockedPtr = const_cast<void*>(static_cast<const void*>(const_cast<bool*>(&_isBlocked)));
+
+  auto checkObstacleTask = [](void* parameter) {
+    volatile bool* _isBlocked = static_cast<volatile bool*>(parameter);
+
+    while (true) {
+      if(Triple_vl53.checkObstacle()) {
+        *_isBlocked = true;
+        digitalWrite(MOTOR_L, LOW);
+        digitalWrite(MOTOR_R, LOW);
+      }
+      else *_isBlocked = false;
+      vTaskDelay(pdMS_TO_TICKS(1));
+    }
+  };
+
+  if (!checkObstacleTaskHandle) xTaskCreatePinnedToCore(checkObstacleTask, "CheckObstacleTask", 10000, _isBlockedPtr, 1, &checkObstacleTaskHandle, 1);
+
   while(millis() - startTime < targetTime){
-  // OBSTACLE
-  if(single_vl53){
-    if(Single_vl53.checkObstacle() and _obstacle_avoidance) {
-      digitalWrite(MOTOR_L, LOW);
-      digitalWrite(MOTOR_R, LOW);
-      unsigned long waitingTimeStart = millis();
-      while(Single_vl53.checkObstacle());
-      targetTime += ( millis() - waitingTimeStart );
-    }
-  }
-  else{
-    if(Triple_vl53.checkObstacle() and _obstacle_avoidance) {
-      digitalWrite(MOTOR_L, LOW);
-      digitalWrite(MOTOR_R, LOW);
-      unsigned long waitingTimeStart = millis();
-      while(Triple_vl53.checkObstacle()) delay(100);
-      targetTime += ( millis() - waitingTimeStart );
-    }
+    unsigned long waitingTimeStart = millis();
+    while(_isBlocked){
+      if(!_isBlocked) break;
+    };
+    targetTime += ( millis() - waitingTimeStart );
+  
+    digitalWrite(MOTOR_R, HIGH); digitalWrite(MOTOR_L, LOW);
+    delay(50);
+    digitalWrite(MOTOR_R, LOW);
+    delay(150);
+
+    vTaskDelay(pdMS_TO_TICKS(1));
   }
 
-      digitalWrite(MOTOR_L, LOW); digitalWrite(MOTOR_R, HIGH);
-      delay(100);
-      digitalWrite(MOTOR_R, LOW);
-      delay(2);
-    }
+  if (checkObstacleTaskHandle) {
+    vTaskDelete(checkObstacleTaskHandle);
+    checkObstacleTaskHandle = NULL;
+  }
 
   digitalWrite(MOTOR_L, LOW);
   digitalWrite(MOTOR_R, LOW);
-
 }
 
 
@@ -176,7 +197,6 @@ void WHEEL::rotateCounterClockwise(const float time, const bool single_vl53){
  * @brief  直走，加入光閘，調用 FreeRTOS 閉路控制
  * @param time 時間
  */
- 
 void WHEEL::moveDirect2(const float time){
   Serial.print("\n[WHEEL][Move Direct 2] Start !\n");
 
@@ -292,7 +312,7 @@ void WHEEL::moveDirect2(const float time){
  */
 void WHEEL::rotateClockwise2(const int steps){
   Serial.print("[WHEEL][Rotate Clockwise 2] Start !\n");
-  force_zero_cali();
+  // force_zero_cali();
 
   int falseCount = 0;
   bool previousState = Glv.get_glv_r();
@@ -334,12 +354,12 @@ void WHEEL::rotateCounterClockwise2(const int steps){
   while(true){
     bool currentState = Glv.get_glv_l();
 
-    digitalWrite(MOTOR_L, HIGH); delay(15);
-    digitalWrite(MOTOR_L, LOW); delay(5);
+    digitalWrite(MOTOR_L, HIGH); delay(35);
+    digitalWrite(MOTOR_L, LOW); delay(200);
     
     if(previousState && !currentState){
       falseCount++;
-      delay(500);
+      delay(50);
     }
     if(falseCount >= steps) break;
     previousState = currentState;
@@ -380,13 +400,13 @@ void WHEEL::force_zero_cali(){
   
   // Right Side Calibration
   while(Glv.get_glv_r()){
-    digitalWrite(MOTOR_R, HIGH); delay(25);
+    digitalWrite(MOTOR_R, HIGH); delay(35);
     digitalWrite(MOTOR_R, LOW); delay(300);
   }
 
   // Left Side Calibration
   while(Glv.get_glv_l()){
-    digitalWrite(MOTOR_L, HIGH); delay(25);
+    digitalWrite(MOTOR_L, HIGH); delay(35);
     digitalWrite(MOTOR_L, LOW); delay(300);
   }
 

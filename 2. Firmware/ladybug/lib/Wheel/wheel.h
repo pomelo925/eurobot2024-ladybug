@@ -7,8 +7,8 @@
 class WHEEL{
 public:
   void moveDirect(const float time, const bool single_vl53);
-  void rotateClockwise(const float time, const  bool single_vl53);
-  void rotateCounterClockwise(const float time, const bool single_vl53);
+  void rotateClockwise(const float time);
+  void rotateCounterClockwise(const float time);
 
   void moveDirect2(const float time);
   void rotateClockwise2(const int steps);
