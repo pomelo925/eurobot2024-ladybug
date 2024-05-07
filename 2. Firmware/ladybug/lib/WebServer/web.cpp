@@ -3,10 +3,6 @@
 int WEBSERVER::readySignal = 0;
 int WEBSERVER::color = -1;
 
-IPAddress local_IP(192, 168, 8, 61);
-IPAddress gateway(192, 168, 8, 1);
-IPAddress subnet(255, 255, 255, 0);
-
 // Replaces placeholder with button section in your web page
 String WEBSERVER::processor(const String& var) {
   return String();
@@ -14,6 +10,14 @@ String WEBSERVER::processor(const String& var) {
 
 void WEBSERVER::initWiFi() {
   WiFi.mode(WIFI_STA);
+
+  IPAddress gateway(192, 168, 8, 1);
+  IPAddress subnet(255, 255, 255, 0);
+
+  IPAddress local_IP;
+  if(_id>=1 && _id<=6) local_IP = IPAddress(192, 168, 3, 50+_id);
+  else local_IP = IPAddress(192, 168, 3, 50+_id);
+
   if (!WiFi.config(local_IP, gateway, subnet)) Serial.println("STA Failed to configure");
   WiFi.begin(_ssid, _password);
 

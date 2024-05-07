@@ -36,7 +36,6 @@ void BUGS::ID_2_run(const int color){
   if(color == _YELLOW){
     Serial.print("[MISSION] COLOR: Yellow\n");
     Wheel.moveDirect2(0.04*3.1415926);
-
     return;
   }
 

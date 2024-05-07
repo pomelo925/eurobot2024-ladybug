@@ -3,12 +3,17 @@
 #include <mission.h>
 #include <wheel.h>
  
-/******** USER DEFINED *********/
-#define SSID "DIT_8C58" // mDNS Hostname
-#define PWD "ditrobotics" // mDNS Hostname
-#define HOSTNAME "ladybug-11" // mDNS Hostname
-#define LADYBUG_ID 11// Mission ID
-/*******************************/
+#define LADYBUG_ID 4
+#define PWD "ditrobotics"
+
+/******** ID: 1~6 @ Differential *********/
+#if LADYBUG_ID >= 1 && LADYBUG_ID <= 6
+  #define SSID "DIT_376E"
+/******** ID: 7~12 @ Ominversal *********/
+#elif LADYBUG_ID >= 7 && LADYBUG_ID <= 12
+  #define SSID "DIT_8C58"
+#endif
+
 
 AsyncWebServer server(80);
 
@@ -16,10 +21,16 @@ void setup() {
   Serial.begin(115200);
 
 /* 1. Initialization */
-  WEBSERVER Webserver(SSID, PWD, HOSTNAME, server);
+  WEBSERVER Webserver(SSID, PWD, LADYBUG_ID, server);
   Wheel.setup();
-  // Wheel.zero_cali();
-  
+
+/******** ID: 1~4 & 7~10 @ ONLY *********/
+#if (LADYBUG_ID >= 1 && LADYBUG_ID <= 4) || (LADYBUG_ID >= 7 && LADYBUG_ID <= 10)
+  Wheel.zero_cali();
+#endif
+/*******************************/
+
+
 /* 2. Wait for request */
   Serial.println("[MAIN] Wait For Request ...");
   while(!Webserver.readySignal) delay(500);
@@ -76,40 +87,4 @@ void loop(){
   // delay(5);
   // digitalWrite(MOTOR_R, LOW); digitalWrite(MOTOR_L, LOW);
   // delay(15);
-// }
-
-/***** 分隔線 *****/
-
-// #include <Arduino.h>
-// #include <web.h>
-// #include <mission.h>
-// #include <triple_vl53.h>
-// #include <wheel.h>
- 
-// /******** USER DEFINED *********/
-// #define SSID "DIT_8C58" // mDNS Hostname
-// #define PWD "ditrobotics" // mDNS Hostname
-// #define HOSTNAME "ladybug-1" // mDNS Hostname
-// #define LADYBUG_ID 1 // Mission ID
-
-// #define HOMOLOGATION_MODE false
-// /*******************************/
-
-// AsyncWebServer server(80);
-
-// void setup() {
-//   Serial.begin(115200);
-
-//   WEBSERVER Webserver(SSID, PWD, HOSTNAME, server);
-  
-//   Serial.println("[MAIN] Wait For Request ...");
-//   while(!Webserver.readySignal) delay(500);
-
-//   Triple_vl53.setup();
-//   Wheel.setup();
-// }
-
-
-// void loop(){
-//   Serial.println(Triple_vl53.checkObstacle());
 // }

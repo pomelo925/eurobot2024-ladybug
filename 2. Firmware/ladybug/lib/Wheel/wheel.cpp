@@ -16,7 +16,7 @@ void WHEEL::setup(){
 
 
 /**
- * @brief  避障直走，調用 FreeRTOS 更新 VL530x 資訊，無配合光閘
+ * @brief 計時，避障直走，調用 FreeRTOS 更新 VL530x
  * @param time 行走時間 
  * @param single_vl53 單 vl53 設 true，三 vl53 設 false
  */
@@ -80,7 +80,7 @@ void WHEEL::moveDirect(const float time, const bool single_vl53){
 
 
 /**
- * @brief  順時鐘走，無配合光閘
+ * @brief  計時，避障順時鐘走，調用 FreeRTOS 更新 VL530x 
  * @param time 行走時間
  */
 void WHEEL::rotateClockwise(const float time){
@@ -137,7 +137,7 @@ void WHEEL::rotateClockwise(const float time){
 
 
 /**
- * @brief  逆時鐘走，無配合光閘
+ * @brief 計時，避障逆時鐘走，調用 FreeRTOS 更新 VL530x 
  * @param time 行走時間
  */
 void WHEEL::rotateCounterClockwise(const float time){
@@ -194,7 +194,7 @@ void WHEEL::rotateCounterClockwise(const float time){
 
 
 /**
- * @brief  直走，加入光閘，調用 FreeRTOS 閉路控制
+ * @brief 計時，避障直走，調用 FreeRTOS 更新 VL530x，光閘閉迴路校正
  * @param time 時間
  */
 void WHEEL::moveDirect2(const float time){
@@ -307,7 +307,7 @@ void WHEEL::moveDirect2(const float time){
 
 
 /**
- * @brief  順時鐘走，加入光閘
+ * @brief 計步，避障，調用 FreeRTOS 更新 VL530x，光閘閉迴路校正
  * @param steps steps 數量，光閘由 true 轉為 false 的間距視為一個 step
  */
 void WHEEL::rotateClockwise2(const int steps){
@@ -339,7 +339,7 @@ void WHEEL::rotateClockwise2(const int steps){
 
 
 /**
- * @brief  逆時鐘走，加入光閘
+ * @brief 計步，避障直走，調用 FreeRTOS 更新 VL530x，光閘閉迴路校正
  * @param steps steps 數量，光閘由 true 轉為 false 的間距視為一個 step
  */
 void WHEEL::rotateCounterClockwise2(const int steps){
@@ -370,7 +370,7 @@ void WHEEL::rotateCounterClockwise2(const int steps){
 
 
 /**
- * @brief  零點校正，使兩輪皆處於 false 狀態
+ * @brief 懸空零點校正，使兩輪皆處於 false 狀態
  */
 void WHEEL::zero_cali(){
   Serial.println("[WHEEL] Calibrating ...");
@@ -393,7 +393,7 @@ void WHEEL::zero_cali(){
 
 
 /**
- * @brief  強制零點校正，使兩輪皆處於 false 狀態
+ * @brief 負載強制零點校正，使兩輪皆處於 false 狀態
  */
 void WHEEL::force_zero_cali(){
   Serial.println("[WHEEL] Force Calibrating ...");

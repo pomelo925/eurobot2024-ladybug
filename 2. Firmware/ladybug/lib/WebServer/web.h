@@ -11,12 +11,19 @@ class WEBSERVER{
 public:
   static int readySignal;
   static int color;
-  WEBSERVER(String ssid, String password, String hostname, AsyncWebServer &server): \
-   _ssid(ssid), _password(password), _hostname(hostname){
+  WEBSERVER(String ssid, String password, int id, AsyncWebServer &server): \
+   _ssid(ssid), _password(password), _id(id){
+    // hostname 
+    char hostname[12];
+    sprintf(hostname, "ladybug-%02d", id);
+    _hostname = String(hostname);
+
+    // init
     startup(server);
   };
 
 private:
+  int _id = 1;
   String _ssid = "DIT_8C58";          // WiFi SSID
   String _password = "ditrobotics";   // WiFi PWD
   String _hostname = "ladybug-01";    // mDNS Hostname
