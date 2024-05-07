@@ -16,7 +16,7 @@ void WEBSERVER::initWiFi() {
 
   IPAddress local_IP;
   if(_id>=1 && _id<=6) local_IP = IPAddress(192, 168, 3, 50+_id);
-  else local_IP = IPAddress(192, 168, 3, 50+_id);
+  else local_IP = IPAddress(192, 168, 8, 44+_id);
 
   if (!WiFi.config(local_IP, gateway, subnet)) Serial.println("STA Failed to configure");
   WiFi.begin(_ssid, _password);
