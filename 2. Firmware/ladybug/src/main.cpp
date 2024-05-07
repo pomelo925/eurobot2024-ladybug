@@ -3,7 +3,7 @@
 #include <mission.h>
 #include <wheel.h>
  
-#define LADYBUG_ID 7
+#define LADYBUG_ID 3
 #define PWD "ditrobotics"
 
 /******** ID: 1~6 @ Differential *********/
