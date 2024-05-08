@@ -14,6 +14,8 @@ public:
   void rotateClockwise2(const int steps);
   void rotateCounterClockwise2(const int steps);
 
+  void moveDirect2_singleVL53(const float time);
+
   void zero_cali();
   void force_zero_cali();
   

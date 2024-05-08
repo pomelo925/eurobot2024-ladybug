@@ -22,7 +22,7 @@ void MISSION::run(){
     Bugs.ID_3_run(_color); break;
 
   case 4:
-    Triple_vl53.setup();
+    Single_vl53.setup();
     Bugs.ID_4_run(_color); break;
 
   case 5: 

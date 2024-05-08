@@ -3,7 +3,7 @@
 #include <mission.h>
 #include <wheel.h>
  
-#define LADYBUG_ID 3
+#define LADYBUG_ID 9
 #define PWD "ditrobotics"
 
 /******** ID: 1~6 @ Differential *********/
@@ -18,7 +18,7 @@
 AsyncWebServer server(80);
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(115200);                                                                                                                                                                                                                                                             
 
 /* 1. Initialization */
   WEBSERVER Webserver(SSID, PWD, LADYBUG_ID, server);
@@ -30,10 +30,9 @@ void setup() {
 #endif
 /*******************************/
 
-
 /* 2. Wait for request */
   Serial.println("[MAIN] Wait For Request ...");
-  while(!Webserver.readySignal) delay(500);
+  while(!Webserver.readySignal) delay(50);
 
 
 /* 3. Start Mission */
@@ -53,7 +52,6 @@ void loop(){
 // #include <web.h>
 // #include <mission.h>
 // #include <single_vl53.h>
-// #include <triple_vl53.h>
 // #include <wheel.h>
 // #include <glv.h>
  
@@ -71,20 +69,13 @@ void loop(){
 // void setup() {
 //   Serial.begin(115200);
 
-//   WEBSERVER Webserver(SSID, PWD, HOSTNAME, server);
-  
-//   Serial.println("[MAIN] Wait For Request ...");
-//   while(!Webserver.readySignal) delay(500);
-
-//   Triple_vl53.setup();
+//   Single_vl53.setup();
 //   Wheel.setup();
 // }
 
 
 // void loop(){
-//   Triple_vl53.checkObstacle(); 
-  // digitalWrite(MOTOR_R, HIGH); digitalWrite(MOTOR_L, HIGH);
-  // delay(5);
-  // digitalWrite(MOTOR_R, LOW); digitalWrite(MOTOR_L, LOW);
-  // delay(15);
+//   Single_vl53.checkObstacle();
+//   delay(10);
+//   Wheel.moveDirect(5,true);
 // }
