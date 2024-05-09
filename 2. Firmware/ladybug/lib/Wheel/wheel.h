@@ -6,7 +6,8 @@
 
 class WHEEL{
 public:
-  void moveDirect(const float time, const bool single_vl53);
+  void moveDirect(const float time);
+  void moveDirectAvoid(const float time, const bool single_vl53);
   void rotateClockwise(const float time);
   void rotateCounterClockwise(const float time);
 
@@ -14,7 +15,8 @@ public:
   void rotateClockwise2(const int steps);
   void rotateCounterClockwise2(const int steps);
 
-  void moveDirect2_singleVL53(const float time);
+  void moveDirectAvoid2_singleVL53(const float time);
+  void moveDirectAvoid2_tripleVL53(const float time);
 
   void zero_cali();
   void force_zero_cali();

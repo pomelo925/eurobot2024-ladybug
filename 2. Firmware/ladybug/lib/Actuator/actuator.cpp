@@ -21,3 +21,12 @@ void SERVO::moveTo(const float angle){
   esp_servo.write(angle);
   attach_check();
 } 
+
+
+/**
+ * @brief 初始化為 0 度
+ */
+void SERVO::setup(){
+  esp_servo.write(90);
+  return;
+}

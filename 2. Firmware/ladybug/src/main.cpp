@@ -1,9 +1,10 @@
 #include <Arduino.h>
 #include <web.h>
 #include <mission.h>
+#include <actuator.h>
 #include <wheel.h>
- 
-#define LADYBUG_ID 9
+
+#define LADYBUG_ID 6
 #define PWD "ditrobotics"
 
 /******** ID: 1~6 @ Differential *********/
@@ -23,6 +24,7 @@ void setup() {
 /* 1. Initialization */
   WEBSERVER Webserver(SSID, PWD, LADYBUG_ID, server);
   Wheel.setup();
+  ESP_Servo.setup();
 
 /******** ID: 1~4 & 7~10 @ ONLY *********/
 #if (LADYBUG_ID >= 1 && LADYBUG_ID <= 4) || (LADYBUG_ID >= 7 && LADYBUG_ID <= 10)

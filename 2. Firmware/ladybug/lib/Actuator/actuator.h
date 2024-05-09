@@ -9,6 +9,7 @@
 class SERVO {
 public:
   void moveTo(const float angle);
+  void setup();
 
   SERVO(int pin): pin(pin) {
     ESP32PWM::allocateTimer(0);
