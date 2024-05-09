@@ -531,7 +531,7 @@ void WHEEL::moveDirect2(const float time){
 
 
 /**
- * @brief 計步，避障，調用 FreeRTOS 更新 VL530x，光閘閉迴路校正
+ * @brief 計步，順時針走，避障，三VL53，光閘校正
  * @param steps steps 數量，光閘由 true 轉為 false 的間距視為一個 step
  */
 void WHEEL::rotateClockwise2(const int steps){
@@ -563,7 +563,7 @@ void WHEEL::rotateClockwise2(const int steps){
 
 
 /**
- * @brief 計步，避障直走，調用 FreeRTOS 更新 VL530x，光閘閉迴路校正
+ * @brief 計步，直走，避障，三VL53，光閘校正
  * @param steps steps 數量，光閘由 true 轉為 false 的間距視為一個 step
  */
 void WHEEL::rotateCounterClockwise2(const int steps){
