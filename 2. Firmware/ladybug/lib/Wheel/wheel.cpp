@@ -20,7 +20,7 @@ void WHEEL::setup(){
  * @param time 行走時間 
  * @param single_vl53 單 vl53 設 true，三 vl53 設 false
  */
-void WHEEL::moveDirectAvoid(const float time, const bool single_vl53){
+void WHEEL::moveDirectAvoid_time(const float time, const bool single_vl53){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000 ; // 0.6 為時間誤差係數
 
@@ -84,7 +84,7 @@ void WHEEL::moveDirectAvoid(const float time, const bool single_vl53){
  * @brief 計時，直走
  * @param time 行走時間
  */
-void WHEEL::moveDirect(const float time){
+void WHEEL::moveDirect_time(const float time){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000 ; // 0.6 為時間誤差係數
 
@@ -109,7 +109,7 @@ void WHEEL::moveDirect(const float time){
  * @brief 計時，順時鐘走，避障，三VL53
  * @param time 行走時間
  */
-void WHEEL::rotateClockwise(const float time){
+void WHEEL::rotateClockwiseAvoid_tripleVL53_time(const float time){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
@@ -166,7 +166,7 @@ void WHEEL::rotateClockwise(const float time){
  * @brief 計時，逆時鐘走，避障，三VL53
  * @param time 行走時間
  */
-void WHEEL::rotateCounterClockwise(const float time){
+void WHEEL::rotateCounterClockwiseAvoid_tripleVL53_time(const float time){
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
@@ -223,14 +223,14 @@ void WHEEL::rotateCounterClockwise(const float time){
  * @brief 計時，直走，避障，三VL53，光閘校正
  * @param time 時間
  */
-void WHEEL::moveDirectAvoid2_tripleVL53(const float time){
+void WHEEL::moveDirectAvoid_tripleVL53_glv_time(const float time){
   Serial.print("\n[WHEEL][Move Direct 2] Start !\n");
 
 /* Calculate Total Steps*/
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
-/* FreeRTOS*/
+/* FreeRTOS */
   static TaskHandle_t leftTaskHandle = NULL;
   static TaskHandle_t rightTaskHandle = NULL;
   static TaskHandle_t checkObstacleTaskHandle = NULL;
@@ -336,14 +336,14 @@ void WHEEL::moveDirectAvoid2_tripleVL53(const float time){
  * @brief 計時，直走，避障，單VL53，光閘校正
  * @param time 時間
  */
-void WHEEL::moveDirectAvoid2_singleVL53(const float time){
+void WHEEL::moveDirectAvoid_singleVL53_glv_time(const float time){
   Serial.print("\n[WHEEL][Move Direct 2] Start !\n");
 
 /* Calculate Total Steps*/
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
-/* FreeRTOS*/
+/* FreeRTOS */
   static TaskHandle_t leftTaskHandle = NULL;
   static TaskHandle_t rightTaskHandle = NULL;
   static TaskHandle_t checkObstacleTaskHandle = NULL;
@@ -450,12 +450,12 @@ void WHEEL::moveDirectAvoid2_singleVL53(const float time){
  * @brief 計時，直走，光閘校正
  * @param time 時間
  */
-void WHEEL::moveDirect2(const float time){
+void WHEEL::moveDirect_glv_time(const float time){
 /* Calculate Total Steps*/
   unsigned long startTime = millis();
   unsigned long targetTime = time * 1000; 
 
-/* FreeRTOS*/
+/* FreeRTOS */
   static TaskHandle_t leftTaskHandle = NULL;
   static TaskHandle_t rightTaskHandle = NULL;
 
@@ -534,7 +534,7 @@ void WHEEL::moveDirect2(const float time){
  * @brief 計步，順時針走，避障，三VL53，光閘校正
  * @param steps steps 數量，光閘由 true 轉為 false 的間距視為一個 step
  */
-void WHEEL::rotateClockwise2(const int steps){
+void WHEEL::rotateClockwiseAvoid_tripleVL53_glv_steps(const int steps){
   Serial.print("[WHEEL][Rotate Clockwise 2] Start !\n");
   // force_zero_cali();
 
@@ -566,7 +566,7 @@ void WHEEL::rotateClockwise2(const int steps){
  * @brief 計步，直走，避障，三VL53，光閘校正
  * @param steps steps 數量，光閘由 true 轉為 false 的間距視為一個 step
  */
-void WHEEL::rotateCounterClockwise2(const int steps){
+void WHEEL::rotateCounterClockwiseAvoid_tripleVL53_glv_steps(const int steps){
   Serial.print("[WHEEL][Rotate Counter Clockwise 2] Start !\n");
   
   force_zero_cali();
